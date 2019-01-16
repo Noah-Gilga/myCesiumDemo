@@ -86,3 +86,12 @@ giser从代码小白开始学习-Cesium
 ![贴地绘线](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/xian2.png)
 ### 模型贴地绘面
 ![绘面](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/mian.png)
+<br><br>
+## 11 动态添加3dtile
+输入3dtile地址在网页中加载该模型并跳转至其boundsphere
+<br>
+![动态添加](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/dongtai.png)
+<br><br>
+## 12 引入360全景
+将360全景与模型相结合 增强可视化
+<br>![360](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/360.png)
