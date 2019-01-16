@@ -10,18 +10,18 @@ giser从代码小白开始学习-Cesium
 ## 1 主界面
 右上角借助开源Navigation插件，实现指南针、快速调整方向功能。随着视角变动，显示当前相机/鼠标点击位置的经纬度坐标及高程信息。
 <br>
-//连接
+![界面](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/jiemian.png)
 <br>
 <br>
 ## 2 数据图层加载
 利用开源ztree.js构建数据图层加载功能，勾选对应数据时加载/移除，选中对应数据名称时自动跳转到对应的boundsphere
 <br>
-//连接
+![图层管理](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/shujutucengjiazai.png)
 <br>
 <br>
 ## 3 楼层单体化
 利用已有的geojson数据对3dtile数据中的楼层单体化，选中对应楼体是高亮，并弹出geojson中存储的楼体信息
-//连接
+![单体化](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/dantihua.png)
 <br>
 <br>
 ## 4 光照阴影
@@ -31,7 +31,7 @@ giser从代码小白开始学习-Cesium
 <br>-暂停 时间暂停 阴影动画停在当前位置
 <br>-开始 时间开始 阴影动画重新开始
 <br>**不足：没有改 webgl 底层渲染效果差 锯齿严重 下个计划：webgl学习**
-//
+![光照](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/guangzhao.png)
 <br>
 <br>
 ## 5 通视
@@ -39,7 +39,8 @@ giser从代码小白开始学习-Cesium
 <br>通视时，两点之间连线为绿色，表示全部可见
 <br>不通视时，两点之间连线为绿色的部分表示起点可视，为红色的部分表示不可视
 <br>
-//连接
+![通视](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tongshi.png)
+![通视](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tongshi2.png)
 <br>
 <br>
 ## 6 淹没
@@ -48,38 +49,40 @@ giser从代码小白开始学习-Cesium
 <br>Height-调整淹没高度
 <br>自定义模拟-自定义区域 
 <br> **单击左键加点，双击确定区域，初始默认1m**
-<br>//连接
+<br>![淹没](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/yanmo.png)
+<br>![自定义淹没](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/yanmo2.png)
 <br>
 <br>
 ## 7 飞行
 按照确定/创建飞行路线漫游场景
-<br>//连接
+<br>![飞行](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/feixing.png)
 <br>
 <br>
 ## 8 建筑剖面
 借助echarts，绘制两点之间建筑的剖面高程
-<br>//连接
+<br>![建筑剖面](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/poumian.png)
 <br><br>
 ## 9 调高
 自定义调整加载模型的高程
-<br>//连接
+<br>![调整模型高度](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tiaogao.png)
+<br>![调整模型高度](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tiaogao2.png)
 <br><br>
 ## 10 测量绘制
 ### 模型距离测量
-//连接
+![模型距离测量](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/moxingceliang.png)
 ### 模型面积测量
-//连接
+![模型面积测量](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/模型面积.png)
 ### 贴地距离测量
-//连接
+![贴地距离测量](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tiediceliang.png)
 ### 贴地面积测量
-//连接
+![贴地面积测量](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tiedimianji.png)
 ### 模型点标记
-//连接
+![模型点](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/dian.png)
 ### 贴地点标记
-//连接
+![贴地点](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/dian2.png)
 ### 模型绘线
-//连接
+![模型绘线](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/xian.png)
 ### 贴地绘线
-//连接
+![贴地绘线](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/xian2.png)
 ### 模型贴地绘面
-//连接
+![绘面](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/mian.png)
