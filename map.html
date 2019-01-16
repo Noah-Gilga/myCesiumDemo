@@ -617,7 +617,7 @@
 			//terrainShadows:Cesium.ShadowMode.ENABLED,
             homeButton: true,//主页按钮，默认true
             fullscreenButton: false,//全屏按钮,默认显示true
-            infoBox: false,//点击要素之后显示的信息,默认true
+            infoBox: true,//点击要素之后显示的信息,默认true
 			//requestRenderMode : true,
 			maximumRenderTimeChange : 1,
             navigationHelpButton: false,//导航帮助说明,默认true
@@ -885,7 +885,9 @@
                 }),
                 classificationType: Cesium.ClassificationType.CESIUM_3D_TILE
             });
-            
+            scene.primitives.add(highlight);
+			
+	        
         }
     });
 	
