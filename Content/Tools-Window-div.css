@@ -1,0 +1,529 @@
+	/*工具箱窗口*/
+	div.layerChooser{
+		/*border:2px solid #a1a1a1;*/
+		margin:5%; 
+		background:#fff0;;
+		width:90%;
+		height:30%;
+		font-size:16px;
+		float:left;
+		position:absolute;
+		z-index:9999;
+		top:20px;
+		left:10px;
+		color:white;
+		/* //border-radius:5px;                 /*圆角属性*/ 
+		/* //-moz-border-radius:25px;           /* 老的 Firefox */ 
+	}
+		
+	div.bigChooser{
+		border:2px solid #a1a1a1;
+		padding:10px 10px; 
+		background:rgba(0,0,0,0.37);
+		width:180px;
+		height:220px;
+		float:left;
+		position:absolute;
+		z-index:9999;
+		top:80px;
+		left:80px;
+		color:white;
+		display:none;
+		border-radius:5px;                 /*圆角属性*/
+		-moz-border-radius:25px;           /* 老的 Firefox */
+	}
+			
+	/*淹没模拟窗口外框*/
+	div.floodChooser{
+		border:2px solid #8fccff8f;
+		padding:10px 10px; 
+		background:rgba(0,0,0,0.6);
+		width:180px;
+		height:220px;
+		float:left;
+		position:absolute;
+		z-index:9999;
+		top:80px;
+		left:80px;
+		color:white;
+		display:none;
+		border-radius:5px;                 /*圆角属性*/
+		-moz-border-radius:25px;           /* 老的 Firefox */
+	}
+		
+		
+	/*下拉列表样式*/
+	select {
+		/*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+		border: solid 2px #ec2525;
+
+		/*很关键：将默认的select选择框样式清除*/
+		appearance:none;
+		-moz-appearance:none;
+		-webkit-appearance:none;
+
+		/*在选择框的最右侧中间显示小箭头图片*/
+		background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+
+		color:white;
+		width:100px;
+		/*为下拉小箭头留出一点位置，避免被文字覆盖*/
+		padding: 4px;
+	}
+	
+	/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+	select::-ms-expand { display: none; }
+		
+	/*建通测绘图标div*/
+	div.logoContainer{
+		padding:10px 40px; 
+		width:270px;
+		height:70px;
+		float:left;
+		position:absolute;
+		z-index:9999;
+		bottom:3%;
+		right:3%;
+	}
+			
+	/*着色器窗口*/
+	div.classColor{
+		border:2px solid #a1a1a1;
+		padding:10px 40px; 
+		background:rgba(0,0,0,0.6);
+		width:300px;
+		height:520px;
+		float:left;
+		position:absolute;
+		border-style: solid;
+		border-color: #8fccff8f;
+		z-index:9999;
+		font-size:18px;
+		top:3%;
+		left:40%;
+		display:none;
+		color:white;
+		border-radius:5px;		/*圆角属性*/
+		-moz-border-radius:25px;           /* 老的 Firefox */
+	}
+			
+	/*图标按钮存放的div*/
+	.switch-box{
+		padding:0;
+		margin:0;
+		position:absolute;
+		z-index:9999;
+		top:10px;
+		left:10px;
+		bottom:30px;
+		width:55%;
+		height:60px;
+		border-radius:5px;		/*圆角属性*/
+		-moz-border-radius:25px;           /* 老的 Firefox */
+	}
+				
+	.switch-box .topbar-left{
+		position:absolute;
+		top:0px;
+		left:0%;
+		float:left;
+		width:20%;
+		background:rgba(0,0,0,0.6);
+		height:60px;
+		border-radius:5px;		/*圆角属性*/
+		-moz-border-radius:25px;           /* 老的 Firefox */
+	}
+				
+	.switch-box .topbar-left .bar-item{
+		padding-top:6px;
+		cursor:pointer;
+		user-select:none;
+		float:left;
+		position:relative;
+		width:50%;
+		height:100%;
+		text-align:center;
+	}
+				
+	.switch-box .topbar-right{
+		position:absolute;
+		top:0px;
+		left:12%;
+		float:left;
+		width:88%;
+		height:60px;
+		border-radius:5px;		/*圆角属性*/
+		-moz-border-radius:25px;           /* 老的 Firefox */
+	}
+				
+	.switch-box .topbar-right .bar-item{
+		padding-top:6px;
+		cursor:pointer;
+		user-select:none;
+		float:left;
+		positon:relative;
+		width:10%;
+		height:100%;
+		background:rgba(0,0,0,0.6);
+		text-align:center;
+	}
+		
+	.layerClose{
+		padding:0px;
+		margin:10px;
+		width:100%;
+		height:20px;
+	}
+		
+	div.smallChooser{
+		border:2px solid #a1a1a1;
+		padding:10px 40px; 
+		background:#5e446f8c;
+		width:270px;
+		height:200px;
+		float:left;
+		position:absolute;
+		z-index:9999;
+		top:250px;
+		left:10px;
+		color:black;
+		border-radius:5px;                 /*圆角属性*/
+		-moz-border-radius:25px;           /* 老的 Firefox */
+	}
+			
+	/*加载时鼠标的操作掩膜提示*/
+	.signmask{
+		height:100%;
+		width:100%;
+		background:rgba(0,0,0,0.5);
+		filter:alpha(opacity:50);
+		position:fixed;
+		z-index:9999;
+		top:0px;
+		left:0px;
+	}
+		
+	.signmask.active{
+		background:rgba(0,0,0,0.5)url(../img/1-8dom-1)center no-repeat;
+	}
+			
+	/*p标签存放div*/
+	.p-container{
+		height:12%;
+		width:55%;
+		position:absolute;
+		left:23%;
+		top:40%;
+		text-align:center;
+		color:white;
+	}
+		
+	.pic-container{
+		height:25%;
+		width:55%;
+		position:absolute;
+		left:23%;
+		top:45%;
+		text-align:center;
+		font-size:25;
+		color:white;
+	}
+		
+		
+	/*简介存放div*/
+	.intro-box{
+		height:40%;
+		width:45%;
+		display:none;
+		margin:10px;
+		position:absolute;
+		left:28%;
+		top:25%;
+		background:rgba(0,0,0,0.8);
+		text-align:center;
+		z-index:9999;
+		font-size:20px;
+		color:white;
+	}
+		
+	.top-container{
+		width:100%;
+		height:15%;
+		margin:10px;
+		padding:0px;
+		color:white;
+	}
+		
+	.intro-text{
+		width:100%;
+		height:85%;
+		margin:10px;
+		padding:0px;
+		color:white;
+	}
+		
+	.modal-content{
+		position:absolute;
+		background-color:#fff;
+		border-radius:6px;
+		outline:0;
+		box-shadow:0 3px 9px rgba(0,0,0,0.5);
+		display:none;
+		height:40%;
+		width:45%;
+		left:25%;
+		top:20%;
+		z-index:9999;
+	}
+		
+	.modal-header2{
+		top:0%;
+		left:0%;
+		width:100%;
+		height:10%;
+		border-bottom:1px solid;
+	}
+		
+	.share-body{
+		padding:5px;
+		width:90%;
+		height:90%;
+	}
+		
+	.share-line{
+		padding:20 0 0;
+	}
+		
+	.input-text{
+		float:left;
+		padding-right:0;
+		padding-left:0;
+		position:absolute;
+		display:tables;
+		border-collapse:separate;
+		width:70%;
+		left:15%;
+	}
+		
+	.input-btn{
+		float:left;
+		padding-right:0;
+		padding-left:0;
+		position:absolute;
+		display:tables;
+		border-collapse:separate;
+		width:15%;
+		height:34px;
+		left:85%;
+		}
+		
+	.share-ma{
+		float:left;
+		padding-right:0;
+		padding-left:0;
+		position:absolute;
+		display:tables;
+		border-collapse:separate;
+		width:50%;
+		left:15%;
+		margin:20px 30%;
+	}
+		
+	.main-container{
+		height:100%;
+		width:120%;
+	}
+				
+	div.zTreeDemoBackground{
+		width: 200px;
+		height:250px;
+		text-align: left;
+		position:absolute;
+		top:80PX;
+		background:rgba(0,0,0,0.6);
+		z-index:9999;
+		display:none;
+		border-radius:5px;                 /*圆角属性*/
+		-moz-border-radius:25px;           /* 老的 Firefox */
+		border-style:solid;
+		border-color:#8fccff8f;
+	}
+			
+	.myButton {
+		display: inline-block;
+		font-size: 24px;
+		cursor: pointer;
+		text-align: center;   
+		text-decoration: none;
+		outline: none;
+		color: #fff;
+		background-color: #2f4e27a6;
+		border: none;
+		border-radius: 15px;
+		box-shadow: 0 9px #999;
+	}
+	
+	.myButton:hover {background-color: #3e8e41}
+
+	.myButton:active {
+		background-color: #3e8e41;
+		box-shadow: 0 5px #666;
+		transform: translateY(4px);
+	}
+			
+	.info-display{
+		width:580px;
+		height:480px;
+		padding:40px;
+		background-color:#00000063;
+		position:absolute;
+		left:40%;
+		top:15%;
+		overflow-y:scroll;
+		overflow-x:none;
+		display:none;
+	}
+			
+	.tb-btn1{
+		width:60px;
+		height:30px;
+		background-color:red;
+		color:white;
+		border:none;
+		display:inline-block;
+	}
+	
+	
+	
+	/*
+	测量计算结果窗口
+	*/
+	.measure-result{
+		margin:35px;
+		color:white;
+	}
+	
+	.measure-button{
+		background-color: #4CAF50; /* Green */
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 12px;
+		border: 1px solid green;
+		cursor: pointer;
+		border-radius: 4px;
+		position: absolute;
+		bottom: 1px;
+		left: 20%;
+		height: 10px;
+	}
+	
+	/*
+	测量工具条-打横
+	*/
+	.tool-bar-middle{
+		background-color: #0000007a;
+		width: 410px;
+		height: 25px;
+		position: absolute;
+		z-index: 9999;
+		border: 1px solid white;
+		border-radius: 4px;
+		bottom: 10%;
+		left: 35%;
+	}
+	
+	.tool-bar-middle ul{
+		margin: 0;
+		list-style: none;
+	}
+	
+	.tool-bar-middle ul li{
+		margin-left: 10px;
+		margin-right: 10px;
+		float: left;
+		color: white;
+	}
+	
+	.tool-bar-middle button{
+		background-color: #ffffff00;
+		border: 0;
+		color: white;
+	}
+	
+	.flood-toolbar{
+		height: 150px;
+		width: 300px;
+		z-index: 9999;
+		position: absolute;
+		left: 15px;
+		bottom: 4.5%;
+		border-radius: 5px;
+		border-style: solid;
+		border-color: #8fccff8f;
+		background: rgba(0,0,0,0.6);
+		display: none;
+		color:white;
+	}
+	
+	
+	
+	.cutResult{
+		text-align: left;
+		position:absolute;
+		background:rgba(0,0,0,0.6);
+		z-index:9999;
+		display:none;
+		border-radius:5px;                 /*圆角属性*/
+		-moz-border-radius:25px;           /* 老的 Firefox */
+		border-style:solid;
+		border-color:#8fccff8f;
+	}
+	
+	
+	
+	#red, #green, #blue {
+		float: left;
+		clear: left;
+		width: 150px;
+		margin: 15px;
+		color: white;
+	}
+	
+	#swatch {
+		width: 120px;
+		height: 100px;
+		margin-top: 18px;
+		margin-left: 350px;
+		background-image: none;
+	  }
+	  
+	#red .ui-slider-range { background: #ef2929; }
+	#red .ui-slider-handle { border-color: #ef2929; }
+	#green .ui-slider-range { background: #8ae234; }
+	#green .ui-slider-handle { border-color: #8ae234; }
+	#blue .ui-slider-range { background: #729fcf; }
+	#blue .ui-slider-handle { border-color: #729fcf; }
+	
+	
+	.btnNew {
+		padding: 5px 8px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		-webkit-transition-duration: 0.4s; /* Safari */
+		transition-duration: 0.4s;
+		cursor: pointer;
+		background-color: #ffffff00; 
+		color: white; 
+		border: 2px solid #4CAF50;
+	}
+
+	.btnNew:hover {
+		background-color: #4CAF50;
+		color: white;
+	}

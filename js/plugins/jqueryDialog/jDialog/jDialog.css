@@ -1,0 +1,290 @@
+/**
+ * 鍩轰簬jQuery鐨刣ialog鏍峰紡
+ */
+.j-dialog {
+    background-color: white;
+    border: 1px solid #ccc;
+    font-size: 14px ;
+    font-family: tahoma, helvetica, "microsoft yahei", "瀹嬩綋",arial;
+    position: absolute;
+    clear: left;
+    overflow: hidden;
+}
+/* 闃村奖 */
+.j-dialog-shadow {
+    -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2) ;
+    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    -ms-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=3,OffY=3,Color=#16000000,Positive=true);
+}
+/* 鍗婇�鏄庤竟妗�*/
+.j-translucent-border {
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+    border: 8px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.j-dialog-fix{
+    position:fixed;
+}
+.j-dialog.j-user-select {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -o-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+.j-dialog .j-dialog-title {
+    line-height: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    text-indent: 10px;
+    background-color:#94D5FD;
+    /*background: url(img/title-bg.png);*/
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -o-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    height: 30px;
+}
+.j-dialog .j-draggable {
+    cursor: move;
+}
+.j-dialog .j-dialog-txt {
+    /*font-size: 14px;*/
+    font-size: 15px;
+    font-weight: bold;
+    color: #666;
+}
+.j-dialog .j-dialog-close {
+    background: url(img/dialog-btns.gif) no-repeat -141px -8px;
+    float: right;
+    line-height: normal;
+    margin: 0px 16px 0 0;
+    text-decoration: none;
+    width:18px;
+    position: absolute;
+    right: -5px;
+    top: 9px;
+}
+.j-dialog .j-dialog-close:hover {
+    background-position: -141px -36px;
+}
+.j-dialog .j-dialog-close.btn-without-title {
+    right: -14px;
+    top: 6px;
+}
+.j-dialog .j-dialog-content {
+    color: #454545;
+}
+.j-dialog .j-dialog-buttons {
+    font-size: 12px;
+    padding:17px 20px 13px 18px;
+    margin: 0;
+    text-align: right;
+}
+.j-dialog .j-dialog-buttons .first-child{
+    background-position: 0 0;
+    color:#fff;
+}
+.j-dialog .j-dialog-buttons .first-child:hover{
+    background-position: 0 -37px;
+}
+.j-dialog .j-dialog-btn{
+    margin-left: 6px;
+    cursor: pointer;
+    border: 0;
+    width: 60px;
+    height: 31px;
+    font-size: 14px;
+    display: inline-block;
+    color: #666;
+    background: url(img/dialog-btns.gif) no-repeat -69px 2px;
+    _line-height: 31px;
+}
+.j-dialog .j-dialog-btn:hover,
+.j-dialog .j-dialog-btn.x-hover{
+    background-position:-69px -28px;
+}
+.j-dialog .j-dialog-btn.x-highlight {
+    color:#fff;
+    background-position:-0 2px;
+}
+.j-dialog .j-dialog-btn.x-highlight:hover,
+.j-dialog .j-dialog-btn.x-highlight.x-hlhover {
+    background-position:0 -28px;
+}
+
+
+/*灏忎笁瑙掗儴鍒�/
+.j-dialog .j-triangle {
+    display:block;
+    position:relative;
+}
+.j-dialog .j-triangle .t-border,
+.j-dialog .j-triangle .t-inset{
+    left:0px;
+    top:0px;
+    width:0;
+    height:0;
+    font-size:0;
+    overflow:hidden;
+    position:absolute;
+    border-width:12px;
+    /*鍙湪姝ゅ鏇存敼灏忎笁瑙掓柟鍚戯細涓�鍙�涓�宸︼紙solid鐨勪綅缃級*/
+    border-style:dashed solid dashed dashed;
+}
+/*灏忎笁瑙掔殑杈规锛屽鏋滀笉闇�锛屽彲灏嗛鑹插�鏀瑰彉*/
+.j-dialog .j-triangle .t-border{
+    border-color:transparent #aaa transparent transparent;
+    left:-1px;
+}
+.j-dialog .j-triangle .t-inset{
+    border-color: transparent #fff transparent transparent;
+}
+
+/*鎺у埗鏂瑰悜*/
+/*涓嬬澶�/
+.j-dialog .j-triangle.anchor-bottom .t-border,
+.j-dialog .j-triangle.anchor-bottom .t-inset {
+    border-style:solid dashed dashed dashed;
+}
+.j-dialog .j-triangle.anchor-bottom .t-border{
+    border-color:#aaa transparent transparent transparent;
+    left:0px;
+    top:1px;
+}
+.j-dialog .j-triangle.anchor-bottom .t-inset{
+    border-color: #fff transparent transparent transparent;
+}
+
+/*涓婄澶�/
+.j-dialog .j-triangle.anchor-top .t-border,
+.j-dialog .j-triangle.anchor-top .t-inset {
+    border-style:dashed dashed solid dashed;
+}
+.j-dialog .j-triangle.anchor-top .t-border{
+    border-color:transparent transparent #aaa transparent;
+    left:0px;
+    top:-1px;
+}
+.j-dialog .j-triangle.anchor-top .t-inset{
+    border-color: transparent transparent #fff transparent;
+}
+
+/*鍙崇澶�/
+.j-dialog .j-triangle.anchor-right .t-border,
+.j-dialog .j-triangle.anchor-right .t-inset {
+    border-style:dashed dashed dashed solid;
+}
+.j-dialog .j-triangle.anchor-right .t-border{
+    border-color:transparent transparent transparent #aaa;
+    left:1px;
+    top:0;
+}
+.j-dialog .j-triangle.anchor-right .t-inset{
+    border-color: transparent transparent transparent #fff;
+}
+
+
+/* 閬僵灞傛牱寮�*/
+.j-dialog-mask {
+    background-color: #000;
+    filter: alpha(opacity = 40);
+    opacity: .4;
+    zoom: 1;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width:100%;
+}
+
+/* resize */
+.j-dialog .resizable-es {
+    bottom: 0;
+    cursor: se-resize;
+    height: 10px;
+    position: absolute;
+    right: 0;
+    width: 10px;
+}
+.j-dialog .resizable-es div {
+    border-bottom: 3px double #bbb;
+    border-right: 3px double #bbb;
+    height: 6px;
+    width: 6px;
+    line-height:0;
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+/* 鍔ㄧ敾锛氬璇濇涓烘ā鎬佹椂锛岀偣鍑荤┖鐧藉锛岀獥鍙ｄ細鎽嗗姩 */
+@-webkit-keyframes wobble {
+    0% { -webkit-transform: translateX(0%); }
+    15% { -webkit-transform: translateX(-25%) rotate(-5deg); }
+    30% { -webkit-transform: translateX(20%) rotate(3deg); }
+    45% { -webkit-transform: translateX(-15%) rotate(-3deg); }
+    60% { -webkit-transform: translateX(10%) rotate(2deg); }
+    75% { -webkit-transform: translateX(-5%) rotate(-1deg); }
+    100% { -webkit-transform: translateX(0%); }
+}
+@-moz-keyframes wobble {
+    0% { -moz-transform: translateX(0%); }
+    15% { -moz-transform: translateX(-25%) rotate(-5deg); }
+    30% { -moz-transform: translateX(20%) rotate(3deg); }
+    45% { -moz-transform: translateX(-15%) rotate(-3deg); }
+    60% { -moz-transform: translateX(10%) rotate(2deg); }
+    75% { -moz-transform: translateX(-5%) rotate(-1deg); }
+    100% { -moz-transform: translateX(0%); }
+}
+@-ms-keyframes wobble {
+  0% { -ms-transform: translateX(0%); }
+  15% { -ms-transform: translateX(-25%) rotate(-5deg); }
+  30% { -ms-transform: translateX(20%) rotate(3deg); }
+  45% { -ms-transform: translateX(-15%) rotate(-3deg); }
+  60% { -ms-transform: translateX(10%) rotate(2deg); }
+  75% { -ms-transform: translateX(-5%) rotate(-1deg); }
+  100% { -ms-transform: translateX(0%); }
+}
+@-o-keyframes wobble {
+    0% { -o-transform: translateX(0%); }
+    15% { -o-transform: translateX(-25%) rotate(-5deg); }
+    30% { -o-transform: translateX(20%) rotate(3deg); }
+    45% { -o-transform: translateX(-15%) rotate(-3deg); }
+    60% { -o-transform: translateX(10%) rotate(2deg); }
+    75% { -o-transform: translateX(-5%) rotate(-1deg); }
+    100% { -o-transform: translateX(0%); }
+}
+@keyframes wobble {
+    0% { transform: translateX(0%); }
+    15% { transform: translateX(-25%) rotate(-5deg); }
+    30% { transform: translateX(20%) rotate(3deg); }
+    45% { transform: translateX(-15%) rotate(-3deg); }
+    60% { transform: translateX(10%) rotate(2deg); }
+    75% { transform: translateX(-5%) rotate(-1deg); }
+    100% { transform: translateX(0%); }
+}
+.j-ani-wobble {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -ms-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: wobble;
+    -moz-animation-name: wobble;
+    -ms-animation-name: wobble;
+    -o-animation-name: wobble;
+    animation-name: wobble;
+}

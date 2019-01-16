@@ -1,0 +1,916 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>webgis三维综合版</title>
+
+    <script type="text/javascript" src="js/jquery/jquery-1.9.1.min.js"></script>
+	<!-- drawhelper样式 -->
+    <link href="Content/DrawHelper.css" rel="stylesheet" type="text/css" />
+	<!-- 下方黑色显示坐标样式 -->
+    <link href="Content/cesiumviewer.css" rel="stylesheet" type="text/css" />
+    <link href="Content/map/map-index.css" rel="stylesheet" type="text/css" />
+    <link href="Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="Content/site.css" rel="stylesheet" type="text/css" />
+	<!-- 目录树样式 -->
+	<link rel="stylesheet" href="Content/zTreeStyle.css" type="text/css">
+	<!-- 飞行漫游样式 -->
+	<link rel="stylesheet" href="Content/fly3dPath.css" type="text/css">
+	<!-- 自定义tooltip样式 -->
+	<link href="Content/Tools-Tooltip-div.css" rel="stylesheet" type="text/css" />
+	<!-- 自定义window样式 -->
+	<link href="Content/Tools-Window-div.css" rel="stylesheet" type="text/css" />
+    <link href="js/main/cesium-api-1.42/Widgets/widgets.css" rel="stylesheet" type="text/css" />
+    <script src="js/main/cesium-api-1.42/Cesium.js"></script>
+	<!-- 开源绘图工具 -->
+    <script src="js/main/DrawHelper.js"></script>
+	<!-- 经过修改可进行贴地绘制图形工具 -->
+	<script src="js/Tools-DynamicDraw-ClampGround.js"></script>
+	<script src="js/Tools-Tooltip-div.js"></script>
+	<!-- 指南针 -->
+    <script src="js/main/viewerCesiumNavigationMixin.js"></script>
+    
+	<!-- 量算 -->
+    <script src="js/main/measure.js"></script>
+	<script src="js/main/measure2.js"></script>
+	<!-- 飞行漫游 -->
+    <script type="text/javascript" src="js/main/map.map2dPanel.js"></script>
+    <script type="text/javascript" src="js/main/flycesium.js"></script>
+    <!--对话框-->
+    <link rel='stylesheet' href='js/plugins/jqueryDialog/jDialog/jDialog.css' />
+    <script src='js/plugins/jqueryDialog/jDialog.js' type='text/javascript'></script>
+	<!--ztree-->
+	<script type="text/javascript" src="js/jquery.ztree.core.js"></script>
+	<script type="text/javascript" src="js/jquery.ztree.excheck.js"></script>
+    <style>
+        /*绘制工具Draw样式*/
+        .cesium_toolbar {
+            position: absolute;
+            top: 30%;
+            right: 18%; 
+            display: inline;
+            background: #0f161c;
+            z-index: 999;
+         }
+		.mapfootBottom {
+			width: 100%;
+			height: 30px;
+			background: rgba(0,0,0,0.5);
+			position: absolute;
+			bottom: 0px;
+			cursor: default;
+			display:none;
+		}
+		
+		.3dtileSlider {
+			float: left;
+			clear: left;
+			width: 300px;
+			margin: 15px;
+			height:20px;
+		}
+		
+		
+    </style>
+</head>
+<body>
+	<!--分享窗口-->
+	<div class="modal-content" id="modal-content" >
+		<div class="modal-header2" id="modal-header">
+			<p style="width:80%;position:absolute;left:2%;top:0%;margin:3px;">分享</p>
+			<img src="img/close.png" id="shareBtn" style="width:20px;height:20px;position:absolute;float:right;top:5px;right:10px;"/>
+		</div>
+		<div class="share-body" id="share-body">
+			<div class="share-line" id="share-line" style="height:20%;">
+				<p style="font-size:14px;margin:5px 10px;width:15%;position:absolute;float:left;">链接地址:</p>
+				<div class="input-text" id="input-text">
+					<input type="text" class="form-control" id="input_dlink" value="http://xx.xxx.xxx.xxx:8080/dataApp/cesiumProject/map.html">
+				</div>
+				<div class="input-btn" id="input-btn">
+					<button type="button" clas="btn btn-default btn-xs" id="copyBtn" style="height:100%;blackground-color:blue;">复制链接</button>
+				</div>
+			</div>
+			<div class="share-line" id="share-line2"style="height:60%;">
+				<p style="font-size:14px;margin:5px 10px;width:15%;position:absolute;float:left;">分享到:</p>
+				<div class="share-ma" id="share-ma">
+					<img src="" style="width:120px;height:120px;"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--图层管理弹出提示-->
+	<!--dom弹出提示-->
+	<div class="intro-box" id="dom-warning" style="width:25%;height:15%;left:40%" >
+		<div class="top-container" id="top-container"> <!--放文字以及x的图标-->
+			<p style="width:90%;height:100%;margin:0px 0px 0px 20px;padding:0px;text-align:left;">注意</p>
+			<img src="img/close.png" id="domWarnBtn" style="width:20px;height:20px;position:absolute;float:right;top:10px;right:10px;"/>
+		</div>
+		<div class="intro-text" id="intro-text">
+			<p style="width:80%;height:20%;margin:0px 0px 0px 20px;padding:0px;text-align:left;font-size:13px;position:absolute;top:50%;">
+				dom为默认加载项，无法取消加载！
+			</p>
+			
+		</div>
+	</div>
+	
+	<!--自生产地形提示-->
+	<div class="intro-box" id="dem-warning" style="width:25%;height:15%;left:40%" >
+		<div class="top-container" id="top-container"> <!--放文字以及x的图标-->
+			<p style="width:90%;height:100%;margin:0px 0px 0px 20px;padding:0px;text-align:left;">注意</p>
+			<img src="img/close.png" id="demWarnBtn" style="width:20px;height:20px;position:absolute;float:right;top:10px;right:10px;"/>
+		</div>
+		<div class="intro-text" id="intro-text">
+			<p style="width:80%;height:20%;margin:0px 0px 0px 20px;padding:0px;text-align:left;font-size:13px;position:absolute;top:50%;">
+				自生产地形为默认加载项，无法取消加载！
+			</p>
+			
+		</div>
+	</div>
+	
+	
+	<!--全球地形警告-->
+	<div class="intro-box" id="world-warning" style="width:25%;height:15%;left:40%" >
+		<div class="top-container" id="top-container"> <!--放文字以及x的图标-->
+			<p style="width:90%;height:100%;margin:0px 0px 0px 20px;padding:0px;text-align:left;">注意</p>
+			<img src="img/close.png" id="worldWarnBtn" style="width:20px;height:20px;position:absolute;float:right;top:10px;right:10px;"/>
+		</div>
+		<div class="intro-text" id="intro-text">
+			<p style="width:80%;height:20%;margin:0px 0px 0px 20px;padding:0px;text-align:left;font-size:13px;position:absolute;top:50%;">
+				加载世界地形将覆盖自生产地形无法复原，请注意！要重新加载自生产地形请刷新。
+			</p>
+			
+		</div>
+	</div>
+	
+	
+
+	<!--载入中提示mask-->
+	<div class="signmask" id="mask-load" style="display:block;">
+		<div class="p-container" id="p-container">
+			<p style="font-size:20px;font-weight:bold;">真实的3d体验，掌握在你手中</p>
+		</div>
+		<div class="pic-container" id="pic-container">
+			<img id="turn-left" src="img/turn-left.png" style="width:20px;height:20px;margin:10px;"/>
+			<img id="mouse-left" src="img/left.png" style="width:30px;height:40px;"/>
+			<img id="mouse-middle" src="img/middle.png" style="width:30px;height:40px;"/>
+			<img id="mouse-right" src="img/right.png" style="width:30px;height:40px;"/>
+			<img id="turn-right" src="img/turn-right.png" style="width:20px;height:20px;margin:10px;"/>
+			<p style="font-size:15px;margin:20px;">左键平移，中键旋转，右键缩放</p>
+			
+		</div>
+	</div>
+	
+	<div class="signmask" id="mask-load2" style="display:none;">
+		<div class="p-container" id="p-container">
+			<p style="font-size:20px;font-weight:bold;">真实的3d体验，掌握在你手中</p>
+		</div>
+		<div class="pic-container" id="pic-container2">
+			<img id="turn-left2" src="img/turn-left.png" style="width:20px;height:20px;margin:10px;"/>
+			<img id="mouse-left2" src="img/left.png" style="width:30px;height:40px;"/>
+			<img id="mouse-middle2" src="img/middle.png" style="width:30px;height:40px;"/>
+			<img id="mouse-right2" src="img/right.png" style="width:30px;height:40px;"/>
+			<img id="turn-right2" src="img/turn-right.png" style="width:20px;height:20px;margin:10px;"/>
+			<p style="font-size:15px;margin:20px;">左键平移，中键旋转，右键缩放</p>
+		</div>
+	</div>
+	
+	<!--三维地球开始-->
+    <div class="main-container" id="main-container">
+        <div class="main-content">
+            <div class="bigChooser" id="big">					
+            </div>
+			<div class="floodChooser" id="flood-sim-window"style="height:200px;width:200px;top:70%;">
+				<img id="flood-close" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;"/>
+				<form style="width:180px;height:50px;position:absolute;top:20%;">
+					淹没高度：
+					<input type="text" id="water-height" style="width:70px;" value="2000" />
+					m
+				</form>
+				<form style="width:180px;height:50px;position:absolute;top:35%;">
+					淹没速度：
+					<input type="text" id="water-speed" style="width:70px;" value="100" />
+					m/s
+					<p style="font-size:10px;color:#0ce665;margin:5px;">注意，该地区最低海拔为1400m，输入的数值为淹没平面高程且必须大于1400m。</p>
+				</form>
+				<button id="flood-sim-btn" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:20px;bottom:15px;" onclick="alertValue()">开始模拟</button>
+				<button id="flood-stop-btn" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:100px;bottom:15px;">1</button>
+				<button id="flood-draw-btn" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:180px;bottom:15px;">自定义范围</button>
+			</div>
+				
+			<!--模拟结束弹出提示-->
+			<div id="flood-result" style="display:none;background-color:#00000042;color:white;position:absolute;width:320px;height:50px;float:left;left:45%;top:15%;z-index:9999;">
+				<p style="text-align:center;margin:10px;">水淹模拟结束！请点击退出模拟按钮退出！</p>
+				<img id="result-close" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;top:15px;"/>
+			</div>
+			
+			<!--clock警告弹出提示-->
+			<div id="startClockWarning" style="display:none;background-color:#00000042;color:white;position:absolute;width:320px;height:50px;float:left;left:45%;top:15%;z-index:9999;">
+				<p style="text-align:center;margin:10px;">阴影变化动画已经开始了！</p>
+				<img id="start-close" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;top:15px;"/>
+			</div>
+			<div id="stopClockWarning" style="display:none;background-color:#00000042;color:white;position:absolute;width:320px;height:50px;float:left;left:45%;top:15%;z-index:9999;">
+				<p style="text-align:center;margin:10px;">阴影变化动画已经停止了！</p>
+				<img id="stop-close" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;top:15px;"/>
+			</div>
+				
+			
+			<!-- 淹没模拟 -->
+			<div class="flood-toolbar" id="flood-toolbar">
+				<img id="flood-close-btn" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;"/>
+				<table style="color:white;position:absolute;top:25px;left:15px;">
+					<tbody><tr>
+						<td>Alpha</td>
+						<td>
+							<input type="range" min="0.0" max="1.0" step="0.02" data-bind="value: alpha, valueUpdate: 'input'">
+							<input type="text" size="5" data-bind="value: alpha">
+						</td>
+					</tr>
+					<tr>
+						<td>Height</td>
+						<td>
+							<input type="range" min="0" max="30" step="1" data-bind="value: height, valueUpdate: 'input'">
+							<input type="text" size="5" data-bind="value: height">
+						</td>
+					</tr>
+				</tbody></table>
+				<button id="flood-sim-btn" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:20px;bottom:15px;" onclick="diyFlood()">自定义模拟</button>
+				<button id="flood-stop-btn" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:120px;bottom:15px;" onclick="diyFloodRemove()">清除模拟</button>
+				<button id="flood-draw-btn" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:210px;bottom:15px;" onclick="floodExample()">例子</button>
+			</div>
+			
+			<!-- 动态载入3dtile -->
+			<div class="flood-toolbar" id="add-toolbar" style="left:40%;bottom:50%;">
+				<img id="add-close-btn" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;"/>
+				<p style="color:white;margin-left:20px;margin-top:20px;">请输入3dtile文件地址:</p>
+				<input type="text" name="3dUrl" id="urlText" value="" style="margin:10px;width:200px;margin-left:20px;">
+				<br>
+				<button id="add-btn" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:20px;bottom:15px;" onclick="diyFlood()">确定</button>
+			</div>
+			
+			<!-- 调整模型高度 -->
+			<div class="flood-toolbar" id="3dHeight-toolbar" >
+				<img id="3dHeight-close-btn" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;"/>
+				<table style="color:white;position:absolute;top:25px;left:15px;">
+					<tbody>
+					<tr>
+						<td>Height</td>
+						<td>
+							<input type="range" min="-500" max="500" step="1" data-bind="value: height, valueUpdate: 'input'">
+							<input type="text" size="5" data-bind="value: height">
+						</td>
+					</tr>
+				</tbody></table>
+				<button id="3dHeight-sim-btn" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:20px;bottom:15px;" onclick="change3dHeight()">调整</button>
+			</div>
+			
+			<!-- 贴地画图工具条 -->
+			<div id="draw-control" class="cesium_toolbar" style="top:20%;right:8%;display:none;">
+				<div class="drawtoolbar">
+					<div class="button" title="添加标记" onclick="drawPoint()">
+						<span>
+							<img src="img/mark.png">
+						</span>
+					</div>
+				</div>
+
+				<div class="drawtoolbar">
+					<div class="button" title="画线" onclick="drawPolyline()">
+						<span>
+							<img src="img/polyline.png">
+						</span>
+					</div>
+				</div>
+				
+				<div class="drawtoolbar">
+					<div class="button" title="画面" onclick="drawPolygon()">
+						<span>
+							<img src="img/polygon.png">
+						</span>
+					</div>
+				</div>
+				
+				<div class="drawtoolbar">
+					<div class="button" title="清除图形" onclick="drawRemove()">
+						<span>
+							<img src="img/clear.png">
+						</span>
+					</div>
+				</div>
+			</div> 
+			
+			<!-- 通视分析 -->
+			<div id="visible-control" class="cesium_toolbar" style="top:20%;right:28%;display:none;">
+				<div class="drawtoolbar">
+					<div class="button" title="画线" onclick="drawVisiblePolyline()">
+						<span>
+							<img src="img/polyline.png">
+						</span>
+					</div>
+				</div>
+				
+				<div class="drawtoolbar">
+					<div class="button" title="清除图形" onclick="drawRemove()">
+						<span>
+							<img src="img/clear.png">
+						</span>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 测量工具条 -->
+			<div class="tool-bar-middle" id="measure-tool-bar" style="left:37%;">
+				<ul>
+					<li><button onclick="new measureLineSpace(viewer,handler)">长度(模型)</button></li>    <!--画法试下重新参考通视分析-->
+					<li><button onclick="new measureDistance(viewer)">长度(贴地)</button></li>						<!--增加弹出一个result提示框-->
+					<li><button onclick="new measureHeight(viewer,handler)">高度</button></li>
+					<li><button onclick="new measureTriangle(viewer,handler)">高度(复杂)</button></li>
+					<li><button onclick="new measureArea(viewer);">面积</button></li> 			<!--增加弹出一个result提示框-->
+					<li><button onclick="drawRemove()">清除</button></li>
+				</ul>
+			</div>
+			
+			<!-- 绘图工具条 -->
+			<div class="tool-bar-middle" id="draw-tool-bar" style="bottom:4.5%;width:460px;">
+				<ul>
+					<li><button onclick="drawModulePoint()">标记(模型)</button></li>
+					<li><button onclick="drawPoint()">标记(贴地)</button></li>
+					<li><button onclick="drawModulePolyline()">画线(模型)</button></li>
+					<li><button onclick="drawPolyline()">画线(贴地)</button></li>
+					<li><button onclick="drawPolygon()">多边形</button></li>
+					<li><button onclick="drawRemove()">清除</button></li>
+				</ul>
+			</div>
+			
+			
+			<!-- 测量结果显示 -->
+			<div id="measure-result-window" class="zTreeDemoBackground" style="left:20%;top:35%;height:130px;">
+				<img id="measure-close" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;"/>
+				<div id="measure-result" class="measure-result">
+					
+				</div>
+				<button class="measure-button" id="measure-button" onclick="drawRemove()">清除所有</button>
+			</div>
+			
+			<!-- <div class="cutResult" id="small"> -->
+				<!-- <legend style="text-align:center;color:red;">调整模型偏差</legend> -->
+					<!-- x:<input type="text" id="xlayer" value="10"/><br/> -->
+					<!-- y:<input type="text" id="ylayer" value="10"/><br/> -->
+					<!-- z:<input type="text" id="zlayer" value="50"/><br/> -->
+					<!-- <input type="button" id="btn1" value="变换"style="position:absolute; left:50px;width:160px;"> -->
+					
+			<!-- </div> -->
+            
+			<div class="cutResult" id="iframe-360-1" style="width:1200px;height:600px;left:10%;top:10%;">
+				<img id="inframe-close" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;"/>
+				<iframe src="http://localhost:8090/vtour/tour.html" style="margin:0px;padding:0px;width:100%;height:100%;">
+					<p>你的电脑不支持内联标签</p>
+				</iframe>
+			</div>
+			
+			<div class="cutResult" id="geoInfoBox-1" style="right:5%;width:300px;height:200px;top:10%;">
+				<img id="infoBoxs-close" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;"/>
+			</div>
+			
+			<!--图层管理ztree-->
+			<div class="zTreeDemoBackground" id="zTreeContainer" style="left:0.5%;">
+				<div style="width:70%;height:20%;margin-left:15%;margin-right:15%;">
+					<button id="btnAdd3d" class="btnNew">添加3dtiles数据</button>
+				</div>
+				<ul id="treeDemo" class="ztree"></ul>
+			</div>
+			
+			<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+			<div id="poumian" class="cutResult" style="height:30%;bottom:1%;right:1%;width:30%;background-color:#00000099 !important;">
+				
+			</div>
+				
+			<!--渲染窗口-->
+			<div class="zTreeDemoBackground" id="effectOnMap" style="left:3%;height:150px;top:70%;">
+				<div class="layerClose" id="layerClose">
+					<img id="tool-close" src="img/close.png" style="width:15px;height:15px;position:absolute;right:5px;"/>
+				</div>
+				<div class="layerChooser" id="shaderEffect" style="top:10px;">
+                    <input type="checkbox" id="shadow" style="margin:5px;">开启阴影<br />
+				</div>
+				<div class="btnChooser" id="shaderEffect" style="top:50px;">
+					<button id="resetTime" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:20px;top:55px;width:150px;" >重置时间</button>
+					<button id="slowTime" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:20px;top:80px;width:70px;" >减速</button>
+					<button id="riseTime" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:20px;top:105px;width:70px;" >加速</button>
+					<button id="stopTime" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:100px;top:80px;width:70px;" >暂停</button>
+					<button id="startTime" class="btn btn-default btn-xs" style="color:#fff;background-color:#fff0;float:left; position:absolute; left:100px;top:105px;width:70px;" >开始</button>
+						
+				</div>
+			</div>
+			
+			<!-- 点云渲染窗口 -->
+            <div class="classColor" id="colorClassify">
+                地面：<input type="color" id="ground" value="#b37c4d" style="position:absolute; left:180px;"><br />
+                低矮植被：<input type="color" id="lowVegetation" value="#7FFF00" style="position:absolute; left:180px;"><br />
+                中高灌木：<input type="color" id="mediumVegetation" value="#00CD66" style="position:absolute; left:180px;"><br />
+                高大乔木：<input type="color" id="highVegetation" value="#008B00" style="position:absolute; left:180px;"><br />
+                建筑物：<input type="color" id="building" value="#FFFF00" style="position:absolute; left:180px;"><br />
+                水体：<input type="color" id="water" value="#0000FF" style="position:absolute; left:180px;"><br />
+                铁路：<input type="color" id="railway" value="#FF8247" style="position:absolute; left:180px;"><br />
+                公路：<input type="color" id="road" value="#CD0000" style="position:absolute; left:180px;"><br />
+                overlap：<input type="color" id="overlap" value="#FF00FF" style="position:absolute; left:180px;"><br />
+                钢丝护网：<input type="color" id="wireGuard" value="#FFFAFA" style="position:absolute; left:180px;"><br />
+                钢丝引导器：<input type="color" id="wireConductor" value="#FFFAFA" style="position:absolute; left:180px;"><br />
+                输电杆塔：<input type="color" id="tramsimissonTower" value="#FFFAFA" style="position:absolute; left:180px;"><br />
+                导线结构连接器：<input type="color" id="wireSturctureConnerctor" value="#FFFAFA" style="position:absolute; left:180px;"><br />
+                桥梁：<input type="color" id="bridge" value="#9932CC" style="position:absolute; left:180px;"><br />
+                未分类：<input type="color" id="unclassified" value="#8B8989" style="position:absolute; left:180px;"><br />
+                low point(noise)：<input type="color" id="lowPoint" value="#b37c4d" style="position:absolute; left:180px;"><br />
+                high point(noise)：<input type="color" id="hightPoint" value="#b37c4d" style="position:absolute; left:180px;"><br />
+                model key-point：<input type="color" id="keyPoint" value="#b37c4d" style="position:absolute; left:180px;"><br />
+                <input type="button" class="myButton" id="colorApply" value="应用" style="position:absolute;bottom:10px; left:40px;color:white;width:60px;font-size:16px;height:40px;">
+                <input type="button"  class="myButton" id="colorClose" value="关闭" style="position:absolute;bottom:10px; left:200px;color:white;width:60px;font-size:16px;height:40px;">
+				<input type="button"  class="myButton" id="undoClassify" value="还原" style="position:absolute;bottom:10px; left:120px;color:white;width:60px;font-size:16px;height:40px;">
+            </div>
+			
+			<!-- 三维飞行 -->
+            <!--三维飞行漫游菜单界面-->
+            <div class="allrttop" id="tool_container" style="display:none;"></div>
+            <div class="allright" id="content" style="position:relative;">
+                <!--<div class="allrttop" id="tool_container"></div>-->
+                <div id="centerPanel">
+                    <div id="map" class="mapone">
+                    </div>
+                        
+					<div class="fly3DPaths" id="fly3DPaths">
+                        <div class="fly3DPaths_title">操作菜单</div>
+                        <!--新增-->
+                        <!-- tab导航部分 -->
+                        <div class='fly3DPaths_tab'>
+                            <ul style='margin-left:0px;' class="fly3DPaths_tab_ul">
+                                <li id='overFlyClick' class="select"><span><span class='flss'></span><a href='javascript:void(0)'>预设路线</a></span></li>
+                                <li id='drawFlyCilck'><span><span class='flss'></span><a href='javascript:void(0);'>手动绘制</a></span></li>
+                            </ul>
+                        </div>
+                        <!-- tab内容部分 -->
+                        <!-- 预设路线 -->
+                        <div id='overFlyPage' style='height: 100%;'>
+                            <div style="padding: 5px;margin-top: 5px;">
+                                <div class='ydph-table-wrap'>
+                                    <div class='ydph-talbe-head'>
+                                        <table id='overFly_table' class='table table-bordered'>
+                                            <thead>
+                                                <tr>
+                                                <!--<th class='colspan1'><input type='checkbox' onchange=''/></th>-->
+													<th class='colspan4'>名称</th>
+                                                    <th class='colspan2'>操作</th>
+                                                    <th class='colspan2'>修改</th>
+                                                    <th class='colspan2'>删除</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 手动绘制 -->
+                        <div id='drawFlyPage' style='height: 100%; display:none'>
+                            <div class="fly3DPaths_content">
+                                <input id="start_Fly3DPaths" class="fly3DPaths_model_id" type="button" value="开始飞行">
+                                <input id="pause_Fly3DPaths" class="fly3DPaths_model_id" type="button" value="暂停飞行">
+                                <input id="playForward_Fly3DPaths" class="fly3DPaths_model_id" type="button" value="向前飞行">
+                                <input id="playReverse_Fly3DPaths" class="fly3DPaths_model_id" type="button" value="向后飞行">
+                                <input id="draw_Fly3DPaths" class="fly3DPaths_model_id" type="button" value="设定路线">
+                                <input id="save_Fly3DPaths" class="fly3DPaths_model_id" type="button" value="保存路线">
+                                <input id="clear_Fly3DPaths" class="fly3DPaths_model_id" type="button" value="清空路线">
+                                <input id="stop_Fly3DPaths" class="fly3DPaths_model_id" type="button" value="退出飞行">
+                            </div>
+                        </div>
+					</div>
+                </div>
+            </div>   
+        </div>
+		
+		<!-- 存放logo -->
+		<div class="logoContainer" id="logoContainer" style="display:none;">
+            <img src="" style="width:100%;border-radius:5px;"/>
+         </div>
+		 
+		
+		
+		
+		
+		
+		<!-- 上方工具条 -->
+		<div class="switch-box" id="switch-box" style="display:block;">
+			<!-- 隐藏时 -->
+			<div class="topbar-left" id="topbar-left">
+				<div class="bar-item menu-switch" id="menu-switch" data-type="7">
+					<img src="img/menu.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/>
+					<span style="color:white;">图层<span>
+				</div>
+				<!-- 右箭头点击展开 -->
+				<div class="bar-item menu-switch" id="hide-switch" data-type="8" style="display:block;width:50%;">
+					<img src="img/display.png" style="width:25px;height:25px;margin:15px;"/>
+				</div>
+			</div>
+			
+			<!-- 已展开工具条 -->
+			<div class="topbar-right" id="topbar-right" style="display:none;">
+				<div class="bar-item tool-switch" id="tool-switch" data-type="1">
+					<img src="img/effect.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/>
+					<span style="color:white;">光照<span>
+				</div>
+				<!-- <div class="bar-item tool-switch" id="shader-switch" data-type="10"> -->
+					<!-- <img src="img/shader.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/> -->
+					<!-- <span style="color:white;">渲染<span> -->
+				<!-- </div> -->
+				<!-- <div class="bar-item opera-switch" id="draw-switch" data-type="5"> -->
+					<!-- <img src="img/draw.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/> -->
+					<!-- <span style="color:white;">绘图<span> -->
+				<!-- </div> -->
+				<!-- <div class="bar-item opera-switch" id="clamp-switch" data-type="11"> -->
+					<!-- <img src="img/clamp.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/> -->
+					<!-- <span style="color:white;">贴地绘图<span> -->
+				<!-- </div> -->
+				<div class="bar-item opera-switch" id="visible-switch" data-type="12" >
+					<img src="img/eye.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/>
+					<span style="color:white;">通视<span>
+				</div>
+				
+				<div class="bar-item opera-switch" id="flood-switch" data-type="6">
+					<img src="img/flood_sim.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/>
+					<span style="color:white;">水淹<span>
+				</div>
+				<!-- <div class="bar-item opera-switch" id="measure-switch" data-type="8"> -->
+					<!-- <img src="img/measure.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/> -->
+					<!-- <span style="color:white;">量测<span> -->
+				<!-- </div> -->
+				<div class="bar-item opera-switch" id="plane-switch" data-type="9">
+					<img src="img/fly.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/>
+					<span style="color:white;">飞行<span>
+				</div>
+				<div class="bar-item opera-switch" id="cutTerrrain-switch" data-type="10">
+					<img src="img/mouse.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/>
+					<span style="color:white;">剖面<span>
+				</div>
+				<div class="bar-item opera-switch" id="changeHeight-switch" data-type="11">
+					<img src="img/height.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/>
+					<span style="color:white;">调高<span>
+				</div>
+				<!--div class="bar-item info-switch" id="info-switch" data-type="2">
+					<img src="img/infomation.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/>
+					<span style="color:white;">帮助<span>
+				</div-->
+				<div class="bar-item share-switch" id="share-switch" data-type="3">
+					<img src="img/share.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/>
+					<span style="color:white;">分享<span>
+				</div>
+				<!-- <div class="bar-item opera-switch" id="opera-switch" data-type="4"> -->
+					<!-- <img src="img/mouse.png" style="display:block;width:25px;height:25px;margin:0 auto 7px;"/> -->
+					<!-- <span style="color:white;">引导<span> -->
+				<!-- </div> -->
+				<!-- 左箭头点击隐藏 -->
+				<div class="bar-item opera-switch" id="display-switch" data-type="4">
+					<img src="img/hide.png" style="display:block;width:25px;height:25px;margin:15px;"/>
+				</div>	
+			</div>
+		</div>	 
+    </div>
+	
+    <script type="text/javascript">
+		var clock = new Cesium.Clock({
+		   startTime : Cesium.JulianDate.fromIso8601('2018-11-01'),
+		   currentTime : Cesium.JulianDate.fromIso8601('2018-11-01'),
+		   stopTime : Cesium.JulianDate.fromIso8601('2018-11-02'),
+		   clockRange : Cesium.ClockRange.LOOP_STOP, // loop when we hit the end time
+		   clockStep : Cesium.ClockStep.SYSTEM_CLOCK_MULTIPLIER,
+		   multiplier : 1000, // how much time to advance each tick
+		   shouldAnimate : true// Animation on by default
+		});
+	
+	//以及点击其他位置隐藏帮助的弹出框
+        var viewer = new Cesium.Viewer('map', {
+			baseLayerPicker:false,
+			imageryProvider:new Cesium.UrlTemplateImageryProvider({
+				url:"http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali"
+			}),
+			<!-- imageryProvider : new Cesium.WebMapTileServiceImageryProvider({ -->
+				<!-- url : 'http://t0.tianditu.com/img_w/wmts', -->
+				<!-- layer : 'img', -->
+				<!-- style : 'default', -->
+				<!-- format : 'tiles', -->
+				<!-- tileMatrixSetID : 'w', -->
+				<!-- credit : new Cesium.Credit('天地图全球影像服务'), -->
+				<!-- maximumLevel : 18 -->
+			<!-- }), -->
+			<!-- terrainProvider : new Cesium.CesiumTerrainProvider({ -->
+				<!-- url : 'https://www.supermapol.com/realspace/services/3D-stk_terrain/rest/realspace/datas/info/data/path/', -->
+				<!-- requestVertexNormals : true -->
+			<!-- }), -->
+			selectionIndicator: false,
+			animation: false, //动画控制，默认true
+			shouldAnimate:true,
+			clockViewModel : new Cesium.ClockViewModel(clock),
+            //animation: false, //动画控制，默认true
+            geocoder: false,//地名查找,默认true
+            timeline: false,//时间线,默认true
+			//terrainShadows: Cesium.ShadowMode.ENABLED,
+			//shadows:true,//阴影
+			//terrainShadows:Cesium.ShadowMode.ENABLED,
+            homeButton: true,//主页按钮，默认true
+            fullscreenButton: false,//全屏按钮,默认显示true
+            infoBox: false,//点击要素之后显示的信息,默认true
+			//requestRenderMode : true,
+			maximumRenderTimeChange : 1,
+            navigationHelpButton: false,//导航帮助说明,默认true
+            navigationInstructionsInitiallyVisible: false,
+			
+		});
+		
+		//viewer.scene.debugShowFramesPerSecond = true;
+		//viewer.clock.shouldAnimate = true;
+		//viewer.scene.targetFrameRate = 100;
+		//viewer.scene.requestRender();
+		//viewer.extend(Cesium.viewerCesiumInspectorMixin);          inspector
+		var globe = viewer.scene.globe;
+		//globe.enableLighting = true;
+		var scene = viewer.scene;
+		viewer.scene.fog.enable = true;
+		
+		
+        // Bounding sphere这个就是让镜头靠近的Home键
+        var boundingSphere = new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(105.00000, 35.00000, 5.8068678), 1100300.5595102);
+
+        // Override behavior of home button
+        viewer.homeButton.viewModel.command.beforeExecute.addEventListener(function (commandInfo) {
+            // Fly to custom position
+            viewer.camera.flyToBoundingSphere(boundingSphere);
+
+            // Tell the home button not to do anything
+            commandInfo.cancel = true;
+        });
+
+        // Set custom initial position
+        viewer.camera.flyToBoundingSphere(boundingSphere, { maximumHeight: 5 });
+		//跳转
+		viewer.camera.flyTo({//初始化跳转某个地方-中国全图
+		    destination: Cesium.Cartesian3.fromDegrees(105.00000, 35.00000,11003000.00)
+        });
+		
+		
+		viewer.scene.globe.depthTestAgainstTerrain = true;                       //开启地形深度检测
+		
+		viewer.scene.globe.enableLighting = true;                                //允许光照
+		
+        //隐藏cesiumlogo
+        viewer._cesiumWidget._creditContainer.style.display = "none";
+		
+		
+		//数据加载完就隐藏开始的那个div
+		window.onload=function(){
+			$("#mask-load").hide();
+			//var material = getElevationContourMaterial(1200);
+			//globe.material = material;
+		};
+		//取消双击效果
+		viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+		
+		
+        //显示当前坐标
+        function show3DCoordinates() {
+            //地图底部工具栏显示地图坐标信息
+            var elementbottom = document.createElement("div");
+            $(".cesium-viewer").append(elementbottom);
+            elementbottom.className = "mapfootBottom";
+
+            var coordinatesDiv = document.getElementById("map_coordinates");
+            if (coordinatesDiv) {
+                coordinatesDiv.style.display = "block";
+            }
+            else {
+                //var scale;
+                var _divID_coordinates = "map_coordinates";
+                coordinatesDiv = document.createElement("div");
+                coordinatesDiv.id = _divID_coordinates;
+                coordinatesDiv.className = "map3D-coordinates";
+                //coordinatesDiv.innerHTML = "<span id='cd_label' style='font-size:13px;text-align:center;font-family:微软雅黑;color:#edffff;'>暂无坐标信息</span>";
+                $(".main-container").append(coordinatesDiv);
+                var handler3D = new Cesium.ScreenSpaceEventHandler(
+                    viewer.scene.canvas);
+                handler3D.setInputAction(function (movement) {
+                    var pick = new Cesium.Cartesian2(movement.endPosition.x, movement.endPosition.y);
+                    if (pick) {
+                        var cartesian = viewer.scene.globe.pick(viewer.camera.getPickRay(pick), viewer.scene);
+                        if (cartesian) {
+                            //世界坐标转地理坐标（弧度）
+                            var cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(cartesian);
+                            if (cartographic) {
+                                //海拔
+                                var height = viewer.scene.globe.getHeight(cartographic);
+                                //视角海拔高度
+                                var he = Math.sqrt(viewer.scene.camera.positionWC.x * viewer.scene.camera.positionWC.x + viewer.scene.camera.positionWC.y * viewer.scene.camera.positionWC.y + viewer.scene.camera.positionWC.z * viewer.scene.camera.positionWC.z);
+                                var he2 = Math.sqrt(cartesian.x * cartesian.x + cartesian.y * cartesian.y + cartesian.z * cartesian.z);
+                                //地理坐标（弧度）转经纬度坐标
+                                var point = [cartographic.longitude / Math.PI * 180, cartographic.latitude / Math.PI * 180];
+                                if (!height) {
+                                    height = 0;
+                                }
+                                if (!he) {
+                                    he = 0;
+                                }
+                                if (!he2) {
+                                    he2 = 0;
+                                }
+                                if (!point) {
+                                    point = [0, 0];
+                                }
+                                coordinatesDiv.innerHTML = "<span id='cd_label' style='font-size:13px;text-align:center;font-family:微软雅黑;color:#edffff;'>" + "视角海拔高度:" + (he - he2).toFixed(2) + "米" + "&nbsp;&nbsp;&nbsp;&nbsp;海拔:" + height.toFixed(2) + "米" + "&nbsp;&nbsp;&nbsp;&nbsp;经度：" + point[0].toFixed(6) + "&nbsp;&nbsp;纬度：" + point[1].toFixed(6) + "</span>";
+                            }
+                        }
+                    }
+                }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+            }
+        }
+        show3DCoordinates();
+        //添加导航控件
+        viewer.extend(Cesium.viewerCesiumNavigationMixin, {});
+		var navi = document.getElementById('distanceLegendDiv');
+		navi.style.position = 'absolute';
+		//navi.style.z-index = '999';
+		navi.style.left = '75%';
+		navi.style.top = '1%';
+		
+        //显示地图工具栏
+        DCI.map2dTool.InitTool(viewer);
+		
+        //量算工具
+        var html = '<div id="toolTip" class="measure-mouse-tip" style="display:none;color:rgb(236, 159, 30);border: 1px solid rgb(236, 159, 30);position:absolute;font-size:12px;color:#fff">单击开始，双击结束</div>';
+        $('.cesium-viewer').append(html);
+		
+		
+        //绘制工具Drawhelper
+        var html = '<div id="toolbar" class="cesium_toolbar"></div>';
+        $('.cesium-viewer').append(html);
+        var drawHelper = new DrawHelper(viewer);
+        var toolbar = drawHelper.addToolbar(document.getElementById("toolbar"), {
+            buttons: ['marker', 'polyline', 'polygon', 'circle', 'extent']
+        });
+		var getToolbar = document.getElementById("toolbar");
+		getToolbar.style.display='none';//生成toolbar时先设定不能被看见，要点击那个按钮才可以
+		
+        //点
+        toolbar.addListener('markerCreated', function (event) {
+            var b = new Cesium.BillboardCollection();
+            viewer.scene.primitives.add(b);
+            var billboard = b.add({
+                show: true,
+                id: "plot",
+                position: event.position,
+                pixelOffset: new Cesium.Cartesian2(0, 0),
+                eyeOffset: new Cesium.Cartesian3(0.0, 0.0, 0.0),
+                horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+                verticalOrigin: Cesium.VerticalOrigin.CENTER,
+                scale: 1.0,
+                image: 'Content/images/glyphicons_242_google_maps.png',
+                color: new Cesium.Color(1.0, 1.0, 1.0, 1.0)
+            });
+            billboard.setEditable();
+        });
+        //线
+        toolbar.addListener('polylineCreated', function (event) {
+            var polyline = new DrawHelper.PolylinePrimitive({
+                positions: event.positions,
+                width: 5,
+                type: "plot",
+                geodesic: true
+            });
+            viewer.scene.primitives.add(polyline);
+            polyline.setEditable();
+
+        });
+        //面
+        toolbar.addListener('polygonCreated', function (event) {
+            var polygon = new DrawHelper.PolygonPrimitive({
+                positions: event.positions,
+                type: "plot",
+                material: Cesium.Material.fromType('Checkerboard')
+            });
+            viewer.scene.primitives.add(polygon);
+            polygon.setEditable();
+        });
+        //圆形
+        toolbar.addListener('circleCreated', function (event) {
+            var circle = new DrawHelper.CirclePrimitive({
+                center: event.center,
+                radius: event.radius,
+                type: "plot",
+                material: Cesium.Material.fromType(Cesium.Material.RimLightingType)
+            });
+            viewer.scene.primitives.add(circle);
+            circle.setEditable();
+        });
+        //矩形
+        toolbar.addListener('extentCreated', function (event) {
+            var extent = event.extent;
+            var extentPrimitive = new DrawHelper.ExtentPrimitive({
+                extent: extent,
+                type: "plot",
+                material: Cesium.Material.fromType(Cesium.Material.StripeType)
+            });
+            viewer.scene.primitives.add(extentPrimitive);
+            extentPrimitive.setEditable();
+        });
+		
+        //三维飞行初始化
+        bxmap.FlyCesium.Init(viewer, drawHelper);//初始化漫游飞行路径功能
+		
+		//单体化示例 1.5.1版本会提示错误
+		var promise = Cesium.GeoJsonDataSource.load('./data/geojson/taimao.json');
+		promise.then(function (dataSource) {
+			viewer.dataSources.add(dataSource);
+			var entities = dataSource.entities.values;
+			var colorHash = {};
+			for (var i = 0; i < entities.length; i++) {
+				var entity = entities[i];
+				<!-- entity.polygon.material = Cesium.Color.WHITE.withAlpha(0.01); -->
+				<!-- entity.polygon.outline = false; -->
+				<!-- entity.show = true; -->
+				<!-- entity.polygon.classificationType = Cesium.ClassificationType.BOTH; -->
+				<!-- viewer.entities.add(entity); -->
+			<!-- } -->
+			//新版需要按照官网demo写 否则会报错
+			var color = colorHash[name];
+            if (!color) {
+                color = Cesium.Color.fromRandom({
+                    alpha : 0.01
+                });
+                colorHash[name] = color;
+            }
+
+            //Set the polygon material to our random color.
+            entity.polygon.material = color;
+            //Remove the outlines.
+            entity.polygon.outline = false;
+
+            //Extrude the polygon based on the state's population.  Each entity
+            //stores the properties for the GeoJSON feature it was created from
+            //Since the population is a huge number, we divide by 50.
+            entity.polygon.extrudedHeight =  30.0;
+           
+			}
+		});
+
+
+		viewer.selectedEntityChanged.addEventListener(function (evnt) {
+        if (evnt == 'undefined') {
+            return;
+        } else {
+            var primitives = scene.primitives._primitives;
+            for (i = 1; i < primitives.length; i++) {
+                if (primitives[i].classificationType == 1) {
+                    primitives.splice(i, 1)
+                }
+            }
+            scene.primitives._primitives = primitives;
+            var polygon = new Cesium.PolygonGeometry({
+                polygonHierarchy: new Cesium.PolygonHierarchy(evnt.polygon.hierarchy._value.positions),
+                extrudedHeight: 30,
+            });
+            var highlight = new Cesium.ClassificationPrimitive({
+                geometryInstances: new Cesium.GeometryInstance({
+                    geometry: polygon,
+                    attributes: {
+                        color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.fromCssColorString('#55DDE0').withAlpha(0.5)),
+                        show: new Cesium.ShowGeometryInstanceAttribute(true)
+                    },
+                    id: polygon.id//'volume 4'
+                }),
+                classificationType: Cesium.ClassificationType.CESIUM_3D_TILE
+            });
+            
+        }
+    });
+	
+	var clock = viewer.clock;
+	
+	
+
+	
+    </script>
+	<script src="js/echarts/build/dist/echarts-all.js"></script>
+	<script src="js/drawClampGround.js"></script>
+	<!-- <script src="js/VisibleTool.js"></script> -->
+	<script src="js/ztreeIni.js"></script>
+	<!-- 通视分析 -->
+	<!-- <script src="js/VisiableMoudle.js"></script> -->
+	<script src="js/VisiableMoudleNice.js"></script>
+	<!-- <script src="js/cutTry.js"></script> -->
+	<script src="js/layerLoad.js"></script>
+	<script src="js/windowControl.js"></script>
+    <script src="js/tool.js"></script>
+    <script src="js/flood.js"></script>
+    <script src="js/change3DtileHeight.js"></script>
+    <script src="js/open360.js"></script>
+	
+	<script src="js/poumian2.js"></script>
+	
+</body>
+</html>
