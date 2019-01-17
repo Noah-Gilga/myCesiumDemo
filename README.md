@@ -4,6 +4,12 @@ giser从代码小白开始学习-Cesium
 <br>
 # ABOUT
 记录我工作第一年接触开发做的第一个项目。借助近来来比较火的开源3维框架Cesium做的项目。使用的版本是Cesium 1.5.1，Cesium更新频率快，新版本API中还有许多要改良和学习的地方。
+<br><br>
+##DATA
+由于数据太大无法上传，先放在百度云上<br>
+**单体化数据**       -链接：https://pan.baidu.com/s/1nsetZPpuJiOlTJ4FNcm59g 提取码：eub3 <br>
+**小村落数据**       -链接：https://pan.baidu.com/s/1eBAU2plOkqGHqHVLoHL60A 提取码：a892 <br>
+**360全景数据**      -链接：https://pan.baidu.com/s/1-8rGCiWvgCiz52BnQ_7exg 提取码：pvzc <br>
 <br>
 <br>
 # FUNCTION
