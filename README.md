@@ -36,7 +36,8 @@ giser从代码小白开始学习-Cesium
 <br>-减速 时间放慢 阴影动画减慢
 <br>-暂停 时间暂停 阴影动画停在当前位置
 <br>-开始 时间开始 阴影动画重新开始
-<br>**不足：没有改 webgl 底层渲染效果差 锯齿严重 下个计划：webgl学习**
+<br>**不足：没有改 webgl 底层渲染效果差 锯齿严重 下个计划：webgl学习**<br>
+<br>
 ![光照](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/guangzhao.png)
 <br>
 <br>
@@ -44,6 +45,7 @@ giser从代码小白开始学习-Cesium
 鼠标左键单击确定起点（绿色），右键单击确定终点（棕色），返回通视结果。
 <br>通视时，两点之间连线为绿色，表示全部可见
 <br>不通视时，两点之间连线为绿色的部分表示起点可视，为红色的部分表示不可视
+<br><br>
 <br>
 ![通视](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tongshi.png)
 ![通视](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tongshi2.png)
@@ -54,27 +56,32 @@ giser从代码小白开始学习-Cesium
 <br>Alpha-调整水体透明度
 <br>Height-调整淹没高度
 <br>自定义模拟-自定义区域 
-<br> **单击左键加点，双击确定区域，初始默认1m**
+<br> **单击左键加点，双击确定区域，初始默认1m**<br>
+<br>
 <br>![淹没](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/yanmo.png)
 <br>![自定义淹没](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/yanmo2.png)
 <br>
 <br>
 ## 7 飞行
-按照确定/创建飞行路线漫游场景
+按照确定/创建飞行路线漫游场景<br>
+<br>
 <br>![飞行](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/feixing.png)
 <br>
 <br>
 ## 8 建筑剖面
-借助echarts，绘制两点之间建筑的剖面高程
+借助echarts，绘制两点之间建筑的剖面高程<br>
+<br>
 <br>![建筑剖面](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/poumian.png)
 <br><br>
 ## 9 调高
-自定义调整加载模型的高程
+自定义调整加载模型的高程<br>
+<br>
 <br>![调整模型高度](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tiaogao.png)
 <br>![调整模型高度](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tiaogao2.png)
 <br><br>
 ## 10 测量绘制
-### 模型距离测量
+### 模型距离测量<br>
+<br>
 ![模型距离测量](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/moxingceliang.png)
 ### 模型面积测量
 ![模型面积测量](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/模型面积.png)
@@ -99,5 +106,6 @@ giser从代码小白开始学习-Cesium
 ![动态添加](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/dongtai.png)
 <br><br>
 ## 12 引入360全景
-将360全景与模型相结合 增强可视化
+将360全景与模型相结合 增强可视化<br>
+<br>
 <br>![360](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/360.png)
