@@ -78,10 +78,8 @@ giser从代码小白开始学习-Cesium
 <br>
 <br>![调整模型高度](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tiaogao.png)
 <br>![调整模型高度](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/tiaogao2.png)
-<br><br>
 ## 10 测量绘制
-### 模型距离测量<br>
-<br>
+### 模型距离测量
 ![模型距离测量](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/moxingceliang.png)
 ### 模型面积测量
 ![模型面积测量](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/infomation/模型面积.png)
