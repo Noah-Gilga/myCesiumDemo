@@ -7,7 +7,7 @@
 ## 1 掩膜
 关注地区高亮效果，其余地方暗淡
 <br>
-![掩膜](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/掩膜.gif)
+![掩膜](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/掩膜.png)
 <br>
 ## 2 序列帧
 使用序列帧加载动态图标
