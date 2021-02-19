@@ -1,5 +1,14 @@
 # myCesiumDemo
-giser从代码小白开始学习-Cesium
+记录一下工作里面做过的功能
+<br>
+<br>
+# 2021 UPDATE
+更新一下离开JT去了VTRON之后开发的部分新功能
+## 1 掩膜
+关注地区高亮效果，其余地方暗淡
+<br>
+![掩膜](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/%E5%8A%A8%E6%80%81%E7%83%AD%E5%8A%9B%E5%9B%BE%E6%BC%94%E5%8F%98.gif)
+<br>
 <br>
 <br>
 # ABOUT
@@ -7,9 +16,9 @@ giser从代码小白开始学习-Cesium
 <br><br>
 ##DATA
 由于数据太大无法上传，先放在百度云上<br>
-**单体化数据**       -链接：https://pan.baidu.com/s/1nsetZPpuJiOlTJ4FNcm59g 提取码：eub3 <br>
-**小村落数据**       -链接：https://pan.baidu.com/s/1eBAU2plOkqGHqHVLoHL60A 提取码：a892 <br>
-**360全景数据**      -链接：https://pan.baidu.com/s/1-8rGCiWvgCiz52BnQ_7exg 提取码：pvzc <br>
+**单体化数据**       -链接：https://pan.baidu.com/s1/1nsetZPpuJiOlTJ4FNcm59g 提取码：eub3 <br>
+**小村落数据**       -链接：https://pan.baidu.com/s1/1eBAU2plOkqGHqHVLoHL60A 提取码：a892 <br>
+**360全景数据**      -链接：https://pan.baidu.com/s1/1-8rGCiWvgCiz52BnQ_7exg 提取码：pvzc <br>
 <br>
 <br>
 # FUNCTION
