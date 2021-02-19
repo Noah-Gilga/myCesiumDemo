@@ -7,8 +7,44 @@
 ## 1 掩膜
 关注地区高亮效果，其余地方暗淡
 <br>
-![掩膜](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/%E5%8A%A8%E6%80%81%E7%83%AD%E5%8A%9B%E5%9B%BE%E6%BC%94%E5%8F%98.gif)
+![掩膜](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/掩膜.gif)
 <br>
+## 2 序列帧
+使用序列帧加载动态图标
+<br>
+![掩膜](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/序列帧.gif)
+<br>
+## 3 聚合图优化
+修改Cesium源码，基于网格距离法，点的聚合计算方式不使用屏幕距离改用实际地理距离，优化原始聚合api中鼠标拖动/倾斜viewer时结果会改变的问题并且聚合图结果会随着地图放大/缩小有下钻/重新聚合的效果
+<br>
+![聚合优化](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/聚合图网格距离法优化1.png)
+![聚合优化](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/聚合图网格距离法优化2.png)
+<br>
+## 4 动态热力图演变
+和时间序列相关的热力图动态演变
+<br>
+![聚合优化](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/动态热力图演变.gif)
+<br>
+## 5 鼠标绘制扇形
+绘制扇形
+<br>
+![聚合优化](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/手动绘制扇形.png)
+<br>
+## 6 鼠标绘制复杂图形
+鼠标绘制带孔的复杂多边形并且管理图层
+<br>
+![聚合优化](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/鼠标绘制复杂图形.png)
+<br>
+## 7 纹理贴图
+线要素加上纹理，可以用来绘制指示线或者作为马路贴图使用等。
+<br>
+![聚合优化](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/纹理贴图.png)
+<br>
+## 8 流动纹理
+shader实现的流光线效果以及动态指示箭头的线的效果
+<br>
+![聚合优化](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/动态纹理贴图.png)
+![聚合优化](https://github.com/Noah-Gilga/myCesiumDemo/blob/master/img/流动纹理.gif)
 <br>
 <br>
 # ABOUT
