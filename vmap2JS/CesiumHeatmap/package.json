@@ -1,0 +1,6 @@
+{
+  "name": "CesiumHeatmap",
+  "version": "0.1",
+  "main": "CesiumHeatmap.js",
+  "files": ["CesiumHeatmap.js"]
+}

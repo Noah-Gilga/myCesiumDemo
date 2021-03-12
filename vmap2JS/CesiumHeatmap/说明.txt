@@ -1,0 +1,3 @@
+CesiumHeatmap_webgl.js 是项目使用版本
+CesiumHeatmap_webgl_bak.js是备份
+CesiumHeatmap_webgl_test.js是开发测试版本
