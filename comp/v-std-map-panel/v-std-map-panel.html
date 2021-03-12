@@ -1,0 +1,177 @@
+<!--
+/**
+ * 地图浮动容器框
+ * @element v-std-map-panel
+ */
+
+/**
+ * 组件ID
+ * @attribute id
+ * @type String
+ * @required
+ */
+-->
+
+<dom-module id="v-std-map-panel">
+  <template>
+      <style>
+        :host {
+          position: absolute;
+          transform: translate3d(0, 0, 0);
+          /*border-radius: 0.5em;
+          background: rgba(0, 25, 66,0.8);
+          color: rgb(200, 210, 220);
+          padding: 1em 0.8em 0.8em 0.8em;
+          box-sizing: border-box;
+          font-size: 0.75em; 
+          z-index: 1;
+          */
+        }
+        .title {
+        }
+        .title h2 {
+          font-size: 1.3em;
+          margin: 0px;
+          display: inline-block;
+        }
+        .title .button-place {
+          float: right;
+          display: inline-block;
+        }
+        .content-wrapper {
+          width: 100%;
+          height: 100%;
+          position: relative;
+        }
+        .alertArrow{
+          position: relative;
+          width: 100%;
+          max-width: 20em;
+          margin: 0 auto;
+          height: 4em;
+        }
+        .defaultArrow{
+          position: absolute;
+          left: 50%;
+          margin-left: -1em;
+          top: 100%;
+          cursor: pointer;
+          width: 0;
+          height: 0;
+          border-left: 1em solid transparent;
+          border-right: 1em solid transparent;
+          /* border-top: 1em solid rgba(0, 25, 66,0.8); */
+          border-top: 1em solid rgba(101, 120, 153, 0.8);
+        }
+        .alertArrow .arrow{
+          width: 100%;
+          height: 2em;
+          position: absolute;
+          top:-1em;
+          left: 0;
+          opacity: 0;
+          animation:arrowAnimate 0.6s infinite linear;
+        }
+        .alertArrow .arrow-half{
+          width: 50%;
+          height: 1em;
+          position: absolute;
+          bottom: 0;
+          left: 25%;
+          animation:arrowAnimate2 0.6s infinite linear;
+        }
+        .greenArrow .arrow{
+          background: url("images/panel-arrow/arrow-green.png") no-repeat;
+          background-size: 100% 100%;
+        }
+        .greenArrow .arrow-half{
+          background: url("images/panel-arrow/arrow-green.png") no-repeat;
+          background-size: 85%;
+          background-position: bottom;
+        }
+        .redArrow .arrow{
+          background: url("images/panel-arrow/arrow-red.png") no-repeat;
+          background-size: 100% 100%;
+        }
+        .redArrow .arrow-half{
+          background: url("images/panel-arrow/arrow-red.png") no-repeat;
+          background-size: 85%;
+          background-position: bottom;
+        }
+        .yellowArrow .arrow{
+          background: url("images/panel-arrow/arrow-yellow.png") no-repeat;
+          background-size: 100% 100%;
+        }
+        .yellowArrow .arrow-half{
+          background: url("images/panel-arrow/arrow-yellow.png") no-repeat;
+          background-size: 85%;
+          background-position: bottom;
+        }
+        .blueArrow .arrow{
+          background: url("images/panel-arrow/arrow-blue.png") no-repeat;
+          background-size: 100% 100%;
+        }
+        .blueArrow .arrow-half{
+          background: url("images/panel-arrow/arrow-blue.png") no-repeat;
+          background-size: 85%;
+          background-position: bottom;
+        }
+        .topArrow{
+          transform: rotateX(180deg);
+        }
+        .arrowHidden{
+          display: none;
+        }
+        .leftArrow,.rightArrow{
+          position: absolute;
+          width: 70%;
+          top:4em;
+        }
+        .leftArrow{
+          left: -45%;
+          transform: rotate(90deg);
+        }
+        .rightArrow{
+          right: -45%;
+          transform: rotate(-90deg);
+        }
+        @keyframes arrowAnimate {
+          0%{width: 100%;opacity: 0; top:-1em;left: 0}
+          100%{width: 30%;opacity: 1; top:2em;left: 35%}
+        }
+        @keyframes arrowAnimate2 {
+          0%{height: 1.8em}
+          100%{height: 0}
+        }
+      </style>
+    <div class="panel-arrow defaultArrow topArrow arrowHidden">
+      <div class="arrow"></div>
+      <div class="arrow-half"></div>
+    </div>
+	  <div class="panel-arrow defaultArrow leftArrow arrowHidden">
+		  <div class="arrow"></div>
+		  <div class="arrow-half"></div>
+	  </div>
+    <div class="title">
+      <h2>{{title}}</h2>
+      <div class="button-place"></div>
+    </div>
+    <div class="content-wrapper">
+      <content></content>
+      <slot></slot>
+    </div>
+	  <div class="panel-arrow defaultArrow rightArrow arrowHidden">
+		  <div class="arrow"></div>
+		  <div class="arrow-half"></div>
+	  </div>
+    <div class="panel-arrow defaultArrow bottomArrow">
+      <div class="arrow"></div>
+      <div class="arrow-half"></div>
+    </div>
+  </template>
+  <script src="v-std-map-panel.js"></script>
+</dom-module>
+
+
+
+

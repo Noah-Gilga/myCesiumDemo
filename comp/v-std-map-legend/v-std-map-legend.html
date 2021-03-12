@@ -1,0 +1,27 @@
+<!--
+/**
+ * v-std-map-legend
+ * @element v-std-map-legend
+ */
+-->
+<dom-module id="v-std-map-legend">
+	<link rel="import" type="css" href="./v-std-map-legend.css" />
+	<template>
+ 		<div class="legend-container">
+      <ul class="list-ul">
+        <template id="legendList" is="dom-repeat" items="{{_legendList}}">
+          <li class="list-item" data-name$="{{item.name}}" data-title$="{{item.title}}" data-icon$="{{item.icon}}" data-icon-hidden$="{{item.iconHidden}}" data-layer-name$="{{item.layerName}}">
+            <div class="icon"><img src="{{item.icon}}" class$="{{item.filter}}" border="0"></div>
+            <div class="title">{{item.title}}</div>
+          </li>
+        </template>
+      </ul>
+    </div>
+    <v-ds-ajax id="ds" url="{{dsUrl}}" data-type="JSON" method="post" autoload></v-ds-ajax>
+	</template>
+	<script src="v-std-map-legend.js"></script>
+</dom-module>
+
+
+
+

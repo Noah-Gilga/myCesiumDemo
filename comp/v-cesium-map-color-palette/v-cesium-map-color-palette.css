@@ -1,0 +1,235 @@
+.fixWrap {
+  width: 100%;
+  height: 100%;
+  background-image: none;
+  background-color: #2c2c2c;
+  box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.6);
+  border-radius: 0.25em;
+  position: relative;
+}
+.fixWrap .title {
+  height: 1.5em;
+  line-height: 1.5em;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-user-select: none;
+  padding: 0 1em;
+}
+.fixWrap .title .title-name {
+  color: #fff;
+  margin-right: 0.2em;
+}
+.fixWrap .menu {
+  position: absolute;
+  width: 5em;
+  bottom: 1.5em;
+  left: 1px;
+  text-align: center;
+  background-color: #333;
+  border: 1px solid #666;
+}
+.fixWrap .menu ul li {
+  cursor: pointer;
+}
+.fixWrap .menu ul li:hover {
+  background-color: #555;
+}
+.fixWrap .footer {
+  position: absolute;
+  width: 100%;
+  height: 1.5em;
+  bottom: 0;
+  border-top: 1px solid #666;
+}
+.fixWrap .footer #btnAdd {
+  margin-left: 1em;
+}
+.fixWrap .footer #btnSet,
+.fixWrap .footer #btnReset,
+.fixWrap .footer #btnSave {
+  float: right;
+  line-height: 1.5em;
+  margin: 0 .5em;
+  cursor: pointer;
+}
+.fixWrap .wrapCon {
+  height: calc(100% - 4em);
+  padding: 0.5em 1em;
+  position: relative;
+}
+.fixWrap .wrapCon #style-list {
+  width: 100%;
+}
+.fixWrap .wrapCon #style-list li {
+  width: 100%;
+  height: 2em;
+  line-height: 2em;
+  background-color: #3f3f3f;
+  margin-bottom: .15em;
+}
+.fixWrap .wrapCon #style-list li.status-false {
+  color: rgba(255, 255, 255, 0.5);
+}
+.fixWrap .wrapCon #style-list li span {
+  display: inline-block;
+  float: left;
+  line-height: 2em;
+}
+.fixWrap .wrapCon #style-list li span:nth-child(1) {
+  margin-left: .5em;
+}
+.fixWrap .wrapCon #style-list li span:nth-child(2) {
+  width: calc(100% - 5.5em);
+  height: 1.5em;
+  text-align: center;
+}
+.fixWrap .panel-shade {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+.fixWrap .panel-style {
+  width: calc(100% - 2em);
+  height: calc(100% - 4em);
+  left: 1em;
+  top: 2em;
+  padding: 0 1em 0.5em 1em;
+  position: absolute;
+  background-color: #3f3f3f;
+  border: 1px solid #666;
+  box-sizing: border-box;
+  z-index: 3;
+}
+.fixWrap .panel-style .panel-title {
+  width: 100%;
+  height: 1.5em;
+  line-height: 1.5em;
+  color: #fff;
+  text-align: center;
+  border-bottom: 1px solid #666;
+}
+.fixWrap .panel-style .button-box {
+  width: calc(100% - 2em);
+  height: 2em;
+  line-height: 2em;
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+}
+.fixWrap .panel-style .button-box span {
+  display: inline-block;
+  width: 3em;
+  height: 1.5em;
+  line-height: 1.5em;
+  font-size: .8em;
+  text-align: center;
+  border: 1px solid #999;
+  background-color: #666;
+  cursor: pointer;
+  margin-left: .5em;
+  border-radius: .25em;
+}
+.fixWrap .panel-style .button-box span:hover {
+  background-color: #444;
+}
+.fixWrap .panel-gray .value-box {
+  margin-top: 2em;
+}
+.fixWrap .panel-gray .value-box input {
+  width: 4em;
+  text-align: right;
+  margin-left: 1em;
+}
+.fixWrap .panel-levels .line-box {
+  width: 100%;
+  margin-top: 1em;
+  position: relative;
+}
+.fixWrap .panel-levels .line-box .line {
+  width: 100%;
+  height: .2em;
+  background-color: #7a7a7a;
+}
+.fixWrap .panel-levels .line-box span {
+  position: absolute;
+  font-size: .5em;
+  margin-left: -0.75em;
+}
+.fixWrap .panel-levels .line-box span.mark-black {
+  color: #000;
+}
+.fixWrap .panel-levels .line-box span.mark-gray {
+  color: #999;
+}
+.fixWrap .panel-levels .line-box span.mark-white {
+  color: #fff;
+}
+.fixWrap .panel-levels .value-box {
+  margin-top: 2em;
+}
+.fixWrap .panel-levels .value-box div {
+  width: 33%;
+  float: left;
+  text-align: center;
+}
+.fixWrap .panel-levels .value-box div span {
+  display: inline-block;
+  width: 4em;
+  text-align: center;
+  font-size: .9em;
+}
+.fixWrap .panel-levels .value-box div input {
+  width: 4em;
+  text-align: right;
+  background-color: #585858;
+  border: none;
+  color: #fff;
+}
+.fixWrap .panel-style .color-background {
+  width: 6em;
+  height: 6em;
+  margin-top: 1em;
+  border: 1px solid #000;
+  background-image: url('images/color_bg.png');
+  background-repeat: repeat;
+  float: left;
+}
+.fixWrap .panel-style .color-background .color-value {
+  width: 100%;
+  height: 100%;
+}
+.fixWrap .panel-style .color-box {
+  width: calc(100% - 8em);
+  float: left;
+  margin-top: 1em;
+  margin-left: 1em;
+}
+.fixWrap .panel-style .color-box > div {
+  margin-top: .25em;
+}
+.fixWrap .panel-style .color-box > div span {
+  margin-right: .5em;
+}
+.fixWrap .panel-style .color-box > div input {
+  width: 4em;
+}
+.btnContain {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  color: #fff;
+}
+.btnContain .icon:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.hidden {
+  display: none;
+}

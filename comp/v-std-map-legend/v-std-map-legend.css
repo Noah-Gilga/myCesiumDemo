@@ -1,0 +1,41 @@
+.legend-container .list-ul {
+  background-image: linear-gradient(to bottom, rgba(46, 101, 239, 0.7), rgba(46, 101, 239, 0.9));
+  color: #fff;
+  padding: .35em;
+  border-radius: .5em;
+  border-top: .1em solid #7ca3da;
+  box-shadow: 0 0 0.5em #000, inset 0 0 0.1em rgba(0, 0, 0, 0.5);
+}
+.legend-container .list-ul li.list-item::before {
+  content: '';
+  height: 50%;
+  width: 0.15em;
+  /* transform: translateY(37%); */
+  position: absolute;
+  left: 0em;
+  top: 25%;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+  border-radius: 10em;
+}
+.legend-container .list-ul li.list-item:nth-child(1)::before {
+  content: none;
+}
+.legend-container .list-ul .list-item {
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  padding: 0 .5em;
+  position: relative;
+}
+.legend-container .list-ul .list-item .icon {
+  width: 1.5em;
+  height: 1.5em;
+  margin: auto;
+}
+.legend-container .list-ul .list-item .icon .filter {
+  filter: brightness(0.75);
+}
+.legend-container .list-ul .list-item .icon img {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,49 @@
+{
+  "name": "地图图例",
+  "label": "v-nbgj-tool-legend",
+  "version": "1.0",
+  "is":"component",
+  "category": 1,
+  "type": 3,
+  "deplete": 1,
+  "shape": {
+    "width": 500,
+    "height": 100
+  },
+  "locks": {},
+  "attr": {
+      "autoload": {
+          "name":"自动渲染",
+          "type":"boolean",
+          "value": true
+      }
+  },
+  "data": {
+    "_attrGroupLine_1":{
+        "name":"数据",
+        "type":"line",
+        "size":"line"
+    },
+    "dsUrl": {
+        "name": "数据源",
+        "type": "resource-select",
+        "source": "imageApi",
+        "basePath": "/kettle/ext/executeTrans/?rep={$rep}&trans={$preName}",
+        "value": ""
+    }
+  },
+  "event": {
+    "_attrGroupLine_1":{
+        "name":"生命周期",
+        "type":"line",
+        "size":"line"
+    },
+    "lifecycleUrl": {
+      "name":"脚本引用",
+      "type":"string",
+      "value": ""
+    }
+  },
+  "avatar": "../../../../../../../../../../../veditor/images/avatar/panel.png",
+  "snapshot": "../../../../../../../../../../../veditor/images/avatar/panel.png"
+}

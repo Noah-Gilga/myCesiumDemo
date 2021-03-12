@@ -1,0 +1,79 @@
+<!--
+/**
+ * v-std-map-cesium
+ * @element v-std-map-cesium
+ */
+-->
+<dom-module id="v-std-map-cesium">
+    <template>
+        <style>
+            :host {
+                width: 100%;
+                height: 100%;
+            }
+            * {
+                margin: 0px;
+                padding: 0px;
+            }
+            #cesiumContainer {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+				cursor: default;
+            }
+            #cesiumContainer .cesium-viewer, 
+            #cesiumContainer .cesium-viewer-cesiumWidgetContainer, 
+            #cesiumContainer .cesium-widget, canvas {
+                width: 100%;
+                height: 100%;
+            }
+            @-webkit-keyframes fade-in {/*针对webkit内核*/  
+                0% {opacity: 0;}  
+                40% {opacity: 0.4;}  
+                100% {opacity: 1;}  
+            } 
+            #mapTag{
+                position: absolute;
+                width: auto;
+                max-width: 10em;
+                line-height: 1.6em;
+                padding: 0.2em;
+                background-color:#ffffff;
+                color:#000000;
+                border: 0.1em solid rgba(0,0,0,0.6);
+                border-radius: 0.2em;
+                animation: fade-in;  
+                animation-duration: 0.8s;  
+                -webkit-animation:fade-in 0.8s; 
+                word-break:break-all; 
+            }
+            .cesium-credit-lightbox-overlay{
+                display: none;
+            }
+
+            .cesium-widget-credits{
+                display: none;
+            }
+        </style>
+        <style include="map-cesium::shadow"></style>
+        <div id="cesiumContainer"></div>
+        <content></content>
+        <div id="mapTag" style="display: none;"></div>
+        <v-ds-ajax id="dsInternal" method="post" data-type="JSON"></v-ds-ajax>
+        <canvas id="myCanvas" width="100" height="100" style="border:1px solid #d3d3d3;">
+    </template>
+    
+    <!-- 放在init函数中，用Seajs引用这些js
+    <script src="../../js/turf/turf.js"></script>
+    <script src="../../js/apng-js/apng.js"></script>
+    <script src="../../js/webgl-heatmap/webgl-heatmap.js"></script>
+    <script src="../../js/CesiumHeatmap/HeatmapImageryProvider.js"></script>
+    <script src="../../js/CesiumHeatmap/CesiumHeatmap_webgl.js"></script>
+    
+    <script src="../../js/PGISImageryProvider_V03.js"></script>
+    <script src="../../js/PGISImageryProvider_V03_local.js"></script>
+    <script src="../../js/PGISImageryProvider_V10.js"></script>
+    -->
+    
+    <script src="v-std-map-cesium.js"></script>
+</dom-module>

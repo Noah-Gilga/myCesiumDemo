@@ -1,0 +1,249 @@
+:root{
+  
+}
+.fixWrap{
+  width: 100%;
+  height: 100%;
+  background-image: none;
+  background-color: #2c2c2c;
+  box-shadow: 0 0 4px 2px rgba(255,255,255,0.6);
+  border-radius: 0.25em;
+  position:relative;
+  .title{
+    height:1.5em;
+    line-height: 1.5em;
+    background: transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    -webkit-user-select: none;
+    padding: 0 1em;
+    .title-name{
+	    color:#fff;
+	    margin-right: 0.2em;
+	  }
+  }
+  .menu{
+		position:absolute;
+		width:5em;
+		bottom:1.5em;
+		left:1px;
+		text-align: center;
+		background-color:#333;
+		border:1px solid #666;
+		ul{
+			li{
+				cursor: pointer;
+				&:hover{
+					background-color:#555;
+				}
+			}
+		}
+  }
+  .footer{
+  	position: absolute;
+  	width: 100%;
+  	height:1.5em;
+  	bottom:0;
+  	border-top:1px solid #666;
+		#btnAdd{
+			margin-left: 1em;
+		}
+		#btnSet,#btnReset,#btnSave{
+			float:right;
+			line-height: 1.5em;
+			margin:0 .5em;
+			cursor: pointer;
+		}
+  }
+  .wrapCon{
+    height: calc(~'100% - 4em');
+    padding: 0.5em 1em;
+    position: relative;
+    // overflow-y: scroll;
+    #style-list{
+    	width:100%;    	
+    	li{
+    		width: 100%;
+    		height: 2em;
+    		line-height: 2em;
+    		background-color: #3f3f3f;
+    		margin-bottom: .15em;
+    		&.status-false{
+    			color:rgba(255,255,255,0.5);
+    		}
+    		span{
+    			display: inline-block;
+    			float:left;
+    			line-height: 2em;
+    			&:nth-child(1){
+    				margin-left: .5em;
+    			}
+    			&:nth-child(2){
+    				width:calc(~'100% - 5.5em');
+    				height: 1.5em;
+    				text-align: center;
+    			}
+    		}
+    	}
+    }
+	}
+	.panel-shade{
+		width:100%;
+		height: 100%;
+		position:absolute;
+		top:0;
+		left:0;
+		background-color:rgba(0,0,0,0.8);
+		z-index:2;
+	}
+	.panel-style{
+		width:calc(~'100% - 2em');
+		height: calc(~'100% - 4em');
+		left:1em;
+		top:2em;
+    padding:0 1em 0.5em 1em;
+    position: absolute;
+    background-color:#3f3f3f;
+    border:1px solid #666;
+    box-sizing:border-box;
+    z-index: 3;
+    .panel-title{
+    	width: 100%;
+    	height: 1.5em;
+    	line-height: 1.5em;
+    	color:#fff;
+    	text-align: center;
+    	border-bottom:1px solid #666;
+    }
+    .button-box{
+    	width: calc(~'100% - 2em');
+    	height:2em;
+    	line-height: 2em;
+    	text-align: right;
+    	position:absolute;
+    	bottom:0;
+    	span{
+    		display: inline-block;
+    		width:3em;
+    		height: 1.5em;
+    		line-height: 1.5em;
+    		font-size: .8em;
+    		text-align: center;
+    		border:1px solid #999;
+    		background-color:#666;
+    		cursor: pointer;
+    		margin-left: .5em;
+    		border-radius: .25em;
+    		&:hover{
+    			background-color:#444;
+    		}
+    	}
+    }
+	}
+	.panel-gray{
+		.value-box{
+			margin-top: 2em;
+			input{
+				width:4em;
+				text-align: right;
+				margin-left: 1em;
+			}
+		}
+	}
+	.panel-levels{
+		
+		.line-box{
+			width:100%;
+			margin-top: 1em;
+			position:relative;
+			.line{
+				width:100%;
+				height: .2em;
+				background-color:#7a7a7a;
+			}
+			span{
+				position:absolute;
+				font-size:.5em;
+				margin-left: -.75em;
+				&.mark-black{
+					color:#000;
+				}
+				&.mark-gray{
+					color:#999;
+				}
+				&.mark-white{
+					color:#fff;
+				}
+			}
+
+		}
+		.value-box{
+			margin-top: 2em;
+			div{
+				width:33%;
+				float:left;
+				text-align: center;
+				span{
+					display: inline-block;
+					width:4em;
+					text-align: center;
+					font-size: .9em;
+				}
+				input{
+					width:4em;
+					text-align: right;
+					background-color: #585858;
+			    border: none;
+			    color: #fff;
+				}
+			}
+		}
+	}
+
+	.panel-style{
+		.color-background{
+			width:6em;
+			height:6em;
+			margin-top: 1em;
+			border:1px solid #000;
+			background-image:url('images/color_bg.png');
+			background-repeat:repeat;
+			float:left;
+			.color-value{
+				width:100%;
+				height: 100%;
+			}
+		}
+		.color-box{
+			width:calc(~'100% - 8em');
+			float:left;
+			margin-top: 1em;
+			margin-left: 1em;
+			&>div{
+				margin-top: .25em;
+				span{
+					margin-right:.5em;
+				}
+				input{
+					width:4em;
+				}
+			}
+		}
+	}
+}
+.btnContain{
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  color: #fff;
+  // font-size: 1.2em;
+  .icon:hover{
+	  background-color: rgba(0,0,0,0.3);
+	}
+}
+.hidden{
+	display: none;
+}

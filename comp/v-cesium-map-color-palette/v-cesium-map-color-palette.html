@@ -1,0 +1,128 @@
+<!--
+/**
+ * 地图底图调色板
+ * @element v-cesium-map-color-palette
+ */
+
+/**
+ * 组件ID
+ * @attribute id
+ * @type String
+ * @required
+ */
+-->
+
+<dom-module id="v-cesium-map-color-palette">
+  <link rel="import" type="css" href="v-cesium-map-color-palette.css" />
+  <template>
+    <style include="all::shadow comp-map::shadow v-cesium-map-color-palette::shadow">
+    :host {
+      
+    }
+    
+  </style>
+    <div class="fixWrap">
+      <div class="title">
+        <span class="title-name">地图调色板</span>
+      </div>
+      <div class="wrapCon">
+        <ul id="style-list">
+          
+        </ul>
+      </div>
+      <!--效果选项菜单-->
+      <div class="menu hidden">
+        <ul>
+          <li panel-id="panel-gray" data-type="gray" data-name="灰度">灰度</li>
+          <li panel-id="" data-type="invert" data-name="反色">反色</li>
+          <li panel-id="panel-levels" data-type="levels" data-name="色阶">色阶</li>
+          <li panel-id="panel-linear" data-type="linear" data-name="线性减淡">线性减淡</li>
+          <li panel-id="panel-multiply" data-type="multiply" data-name="正片叠底">正片叠底</li>
+          <li panel-id="panel-screen" data-type="screen" data-name="滤色">滤色</li>
+        </ul>
+      </div>
+      <div class="footer">
+        <span id="btnAdd" class="icon icon-add-04-fill"></span>
+        <!-- <span id="" class="icon icon-check-03-fill"></span> -->
+        <span id="btnSet">应用</span>
+        <span id="btnReset">还原</span>
+        <span id="btnSave">保存</span>
+      </div>
+
+      <div class="panel-shade hidden"></div>
+      <!--灰度-->
+      <div class="panel-style hidden panel-gray">
+        <div class="panel-title"><span>灰度</span></div>
+        <div class="value-box"><span>修正值</span><input class="value-reference" type="number"></div>
+        <div class="button-box"><span class="btnSave">确定</span><span class="btnCancel">取消</span></div>
+      </div>
+      <!--色阶-->
+      <div class="panel-style hidden panel-levels">
+        <div class="panel-title"><span>色阶</span></div>
+        <div class="line-box">
+          <div class="line"></div>
+          <span class="icon icon-arrow-up-fill-02 mark-black"></span>
+          <span class="icon icon-arrow-up-fill-02 mark-gray"></span>
+          <span class="icon icon-arrow-up-fill-02 mark-white"></span>
+        </div>
+        <div class="value-box">
+          <div><input class="value-black" type="number"><span>阴影</span></div>
+          <div><input class="value-gray"  type="number"><span>中间调</span></div>
+          <div><input class="value-white" type="number"><span>高亮</span></div>
+        </div>
+        <div class="button-box"><span class="btnSave">确定</span><span class="btnCancel">取消</span></div>
+      </div>
+      <!--线性减淡-->
+      <div class="panel-style hidden panel-linear">
+        <div class="panel-title"><span>线性减淡</span></div>
+        <div class="color-background">
+          <div class="color-value"></div>
+        </div>
+        <div class="color-box">
+          <div><span>r</span><input class="value-rgb value-red"   min=0 max=255 type="number" ></div>
+          <div><span>g</span><input class="value-rgb value-green" min=0 max=255 type="number" ></div>
+          <div><span>b</span><input class="value-rgb value-blue"  min=0 max=255 type="number" ></div>
+          <div><span>a</span><input class="value-alpha" type="number" ></div>
+        </div>
+        <div class="button-box"><span class="btnSave">确定</span><span class="btnCancel">取消</span></div>
+      </div>
+      <!--正片叠底-->
+      <div class="panel-style hidden panel-multiply">
+        <div class="panel-title"><span>正片叠底</span></div>
+        <div class="color-background">
+          <div class="color-value"></div>
+        </div>
+        <div class="color-box">
+          <div><span>r</span><input class="value-rgb value-red"   min=0 max=255 type="number" ></div>
+          <div><span>g</span><input class="value-rgb value-green" min=0 max=255 type="number" ></div>
+          <div><span>b</span><input class="value-rgb value-blue"  min=0 max=255 type="number" ></div>
+          <div><span>a</span><input class="value-alpha" type="number" ></div>
+        </div>
+        <div class="button-box"><span class="btnSave">确定</span><span class="btnCancel">取消</span></div>
+      </div>
+      <!--滤色-->
+      <div class="panel-style hidden panel-screen">
+        <div class="panel-title"><span>滤色</span></div>
+        <div class="color-background">
+          <div class="color-value"></div>
+        </div>
+        <div class="color-box">
+          <div><span>r</span><input class="value-rgb value-red"   min=0 max=255 type="number" ></div>
+          <div><span>g</span><input class="value-rgb value-green" min=0 max=255 type="number" ></div>
+          <div><span>b</span><input class="value-rgb value-blue"  min=0 max=255 type="number" ></div>
+          <div><span>a</span><input class="value-alpha" type="number" ></div>
+        </div>
+        <div class="button-box"><span class="btnSave">确定</span><span class="btnCancel">取消</span></div>
+      </div>
+        
+    </div> 
+    <div class="btnContain">
+      <span id="btnClose" title="关闭" class="icon icon-close-corner" on-click='panelHide'></span>
+    </div> 
+  </template>
+  <script src="v-cesium-map-color-palette.js"></script>
+</dom-module>
+
+
+
+
